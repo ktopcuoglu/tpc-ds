@@ -1,0 +1,12 @@
+#tpc configs
+export tpc_scale=1000
+
+#adbpostgre configs
+export adb_host=
+export adb_port=
+export adb_user=
+export adb_pass=
+export adb_schema=
+export oss_id=
+export oss_key=
+export oss_bucket=
