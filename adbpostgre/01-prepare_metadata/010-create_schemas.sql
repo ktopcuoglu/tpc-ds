@@ -1,3 +1,4 @@
-create schema tpcds_100gb;
-create schema tpcds_1tb;
-create schema tpcds_3tb;
+create schema tpcds_1;
+create schema tpcds_100;
+create schema tpcds_1000;
+create schema tpcds_3000;
