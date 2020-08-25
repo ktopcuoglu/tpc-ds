@@ -13,7 +13,9 @@ create table {{adb_schema}}.customer_address
     ca_country                varchar(20)                   ,
     ca_gmt_offset             decimal(5,2)                  ,
     ca_location_type          char(20)                      
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (ca_address_sk);
 
 create table {{adb_schema}}.customer_demographics
 (
@@ -26,7 +28,9 @@ create table {{adb_schema}}.customer_demographics
     cd_dep_count              integer                       ,
     cd_dep_employed_count     integer                       ,
     cd_dep_college_count      integer                       
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (cd_demo_sk);
 
 create table {{adb_schema}}.date_dim
 (
@@ -58,7 +62,9 @@ create table {{adb_schema}}.date_dim
     d_current_month           char(1)                       ,
     d_current_quarter         char(1)                       ,
     d_current_year            char(1)                       
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (d_date_sk);
 
 create table {{adb_schema}}.warehouse
 (
@@ -76,7 +82,9 @@ create table {{adb_schema}}.warehouse
     w_zip                     char(10)                      ,
     w_country                 varchar(20)                   ,
     w_gmt_offset              decimal(5,2)                  
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (w_warehouse_sk);
 
 create table {{adb_schema}}.ship_mode
 (
@@ -86,7 +94,9 @@ create table {{adb_schema}}.ship_mode
     sm_code                   char(10)                      ,
     sm_carrier                char(20)                      ,
     sm_contract               char(20)                      
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (sm_ship_mode_sk);
 
 create table {{adb_schema}}.time_dim
 (
@@ -100,21 +110,27 @@ create table {{adb_schema}}.time_dim
     t_shift                   char(20)                      ,
     t_sub_shift               char(20)                      ,
     t_meal_time               char(20)                      
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (t_time_sk);
 
 create table {{adb_schema}}.reason
 (
     r_reason_sk               integer               not null,
     r_reason_id               char(16)              not null,
     r_reason_desc             char(100)                     
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (r_reason_sk);
 
 create table {{adb_schema}}.income_band
 (
     ib_income_band_sk         integer               not null,
     ib_lower_bound            integer                       ,
     ib_upper_bound            integer                       
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (ib_income_band_sk);
 
 create table {{adb_schema}}.item
 (
@@ -140,7 +156,9 @@ create table {{adb_schema}}.item
     i_container               char(10)                      ,
     i_manager_id              integer                       ,
     i_product_name            char(50)                      
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (i_item_sk);
 
 create table {{adb_schema}}.store
 (
@@ -173,7 +191,9 @@ create table {{adb_schema}}.store
     s_country                 varchar(20)                   ,
     s_gmt_offset              decimal(5,2)                  ,
     s_tax_precentage          decimal(5,2)                  
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (s_store_sk);
 
 create table {{adb_schema}}.call_center
 (
@@ -208,7 +228,9 @@ create table {{adb_schema}}.call_center
     cc_country                varchar(20)                   ,
     cc_gmt_offset             decimal(5,2)                  ,
     cc_tax_percentage         decimal(5,2)                  
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (cc_call_center_sk);
 
 create table {{adb_schema}}.customer
 (
@@ -230,7 +252,9 @@ create table {{adb_schema}}.customer
     c_login                   char(13)                      ,
     c_email_address           char(50)                      ,
     c_last_review_date        char(10)                      
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (c_customer_sk);
 
 create table {{adb_schema}}.web_site
 (
@@ -260,7 +284,9 @@ create table {{adb_schema}}.web_site
     web_country               varchar(20)                   ,
     web_gmt_offset            decimal(5,2)                  ,
     web_tax_percentage        decimal(5,2)                  
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (web_site_sk);
 
 create table {{adb_schema}}.store_returns
 (
@@ -284,6 +310,13 @@ create table {{adb_schema}}.store_returns
     sr_reversed_charge        decimal(7,2)                  ,
     sr_store_credit           decimal(7,2)                  ,
     sr_net_loss               decimal(7,2)                  
+)
+with (orientation=column, appendonly=true)
+distributed by (sr_item_sk, sr_ticket_number)
+partition by range (sr_returned_date_sk)
+(
+    start(2450815) INCLUSIVE end(2453005) INCLUSIVE every (100),
+    default partition others
 );
 
 create table {{adb_schema}}.household_demographics
@@ -293,7 +326,9 @@ create table {{adb_schema}}.household_demographics
     hd_buy_potential          char(15)                      ,
     hd_dep_count              integer                       ,
     hd_vehicle_count          integer                       
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (hd_demo_sk);
 
 create table {{adb_schema}}.web_page
 (
@@ -311,7 +346,9 @@ create table {{adb_schema}}.web_page
     wp_link_count             integer                       ,
     wp_image_count            integer                       ,
     wp_max_ad_count           integer                       
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (wp_web_page_sk);
 
 create table {{adb_schema}}.promotion
 (
@@ -334,7 +371,9 @@ create table {{adb_schema}}.promotion
     p_channel_details         varchar(100)                  ,
     p_purpose                 char(15)                      ,
     p_discount_active         char(1)                       
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (p_promo_sk);
 
 create table {{adb_schema}}.catalog_page
 (
@@ -347,7 +386,9 @@ create table {{adb_schema}}.catalog_page
     cp_catalog_page_number    integer                       ,
     cp_description            varchar(100)                  ,
     cp_type                   varchar(100)                  
-);
+)
+with (orientation=column, appendonly=true)
+distributed by (cp_catalog_page_sk);
 
 create table {{adb_schema}}.inventory
 (
@@ -355,6 +396,13 @@ create table {{adb_schema}}.inventory
     inv_item_sk               integer               not null,
     inv_warehouse_sk          integer               not null,
     inv_quantity_on_hand      integer                       
+)
+with (orientation=column, appendonly=true, compresslevel=1)
+distributed by (inv_date_sk, inv_item_sk, inv_warehouse_sk)
+partition by range (inv_date_sk)
+(
+    start(2450815) INCLUSIVE end(2453005) INCLUSIVE every (100),
+    default partition others
 );
 
 create table {{adb_schema}}.catalog_returns
@@ -386,6 +434,13 @@ create table {{adb_schema}}.catalog_returns
     cr_reversed_charge        decimal(7,2)                  ,
     cr_store_credit           decimal(7,2)                  ,
     cr_net_loss               decimal(7,2)                  
+)
+with (orientation=column, appendonly=true)
+distributed by (cr_item_sk, cr_order_number)
+partition by range (cr_returned_date_sk)
+(
+    start(2450815) INCLUSIVE end(2453005) INCLUSIVE every (8),
+    default partition others
 );
 
 create table {{adb_schema}}.web_returns
@@ -414,6 +469,13 @@ create table {{adb_schema}}.web_returns
     wr_reversed_charge        decimal(7,2)                  ,
     wr_account_credit         decimal(7,2)                  ,
     wr_net_loss               decimal(7,2)                  
+)
+with (orientation=column, appendonly=true)
+distributed by (wr_item_sk, wr_order_number)
+partition by range (wr_returned_date_sk)
+(
+    start(2450815) INCLUSIVE end(2453005) INCLUSIVE every (180),
+    default partition others
 );
 
 create table {{adb_schema}}.web_sales
@@ -452,6 +514,13 @@ create table {{adb_schema}}.web_sales
     ws_net_paid_inc_ship      decimal(7,2)                  ,
     ws_net_paid_inc_ship_tax  decimal(7,2)                  ,
     ws_net_profit             decimal(7,2)                  
+)
+with (orientation=column, appendonly=true, compresslevel=1)
+distributed by (ws_item_sk, ws_order_number)
+partition by range (ws_sold_date_sk)
+(
+    start(2450815) INCLUSIVE end(2453005) INCLUSIVE every (40),
+    default partition others
 );
 
 create table {{adb_schema}}.catalog_sales
@@ -490,6 +559,13 @@ create table {{adb_schema}}.catalog_sales
     cs_net_paid_inc_ship      decimal(7,2)                  ,
     cs_net_paid_inc_ship_tax  decimal(7,2)                  ,
     cs_net_profit             decimal(7,2)                  
+)
+with (orientation=column, appendonly=true, compresslevel=1)
+distributed by (cs_item_sk, cs_order_number)
+partition by range (cs_sold_date_sk)
+(
+    start(2450815) INCLUSIVE end(2453005) INCLUSIVE every (28),
+    default partition others
 );
 
 create table {{adb_schema}}.store_sales
@@ -517,4 +593,11 @@ create table {{adb_schema}}.store_sales
     ss_net_paid               decimal(7,2)                  ,
     ss_net_paid_inc_tax       decimal(7,2)                  ,
     ss_net_profit             decimal(7,2)                  
+)
+with (orientation=column, appendonly=true, compresslevel=1)
+distributed by (ss_item_sk, ss_ticket_number)
+partition by range (ss_sold_date_sk)
+(
+    start(2450815) INCLUSIVE end(2453005) INCLUSIVE every (10),
+    default partition others
 );
