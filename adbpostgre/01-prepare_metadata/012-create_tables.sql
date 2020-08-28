@@ -1,4 +1,4 @@
-create table {{adb_schema}}.customer_address
+create table {{adb_schema_prefix}}_{{tpc_scale}}.customer_address
 (
     ca_address_sk             integer               not null,
     ca_address_id             char(16)              not null,
@@ -17,7 +17,7 @@ create table {{adb_schema}}.customer_address
 with (orientation=column, appendonly=true)
 distributed by (ca_address_sk);
 
-create table {{adb_schema}}.customer_demographics
+create table {{adb_schema_prefix}}_{{tpc_scale}}.customer_demographics
 (
     cd_demo_sk                integer               not null,
     cd_gender                 char(1)                       ,
@@ -32,7 +32,7 @@ create table {{adb_schema}}.customer_demographics
 with (orientation=column, appendonly=true)
 distributed by (cd_demo_sk);
 
-create table {{adb_schema}}.date_dim
+create table {{adb_schema_prefix}}_{{tpc_scale}}.date_dim
 (
     d_date_sk                 integer               not null,
     d_date_id                 char(16)              not null,
@@ -66,7 +66,7 @@ create table {{adb_schema}}.date_dim
 with (orientation=column, appendonly=true)
 distributed by (d_date_sk);
 
-create table {{adb_schema}}.warehouse
+create table {{adb_schema_prefix}}_{{tpc_scale}}.warehouse
 (
     w_warehouse_sk            integer               not null,
     w_warehouse_id            char(16)              not null,
@@ -86,7 +86,7 @@ create table {{adb_schema}}.warehouse
 with (orientation=column, appendonly=true)
 distributed by (w_warehouse_sk);
 
-create table {{adb_schema}}.ship_mode
+create table {{adb_schema_prefix}}_{{tpc_scale}}.ship_mode
 (
     sm_ship_mode_sk           integer               not null,
     sm_ship_mode_id           char(16)              not null,
@@ -98,7 +98,7 @@ create table {{adb_schema}}.ship_mode
 with (orientation=column, appendonly=true)
 distributed by (sm_ship_mode_sk);
 
-create table {{adb_schema}}.time_dim
+create table {{adb_schema_prefix}}_{{tpc_scale}}.time_dim
 (
     t_time_sk                 integer               not null,
     t_time_id                 char(16)              not null,
@@ -114,7 +114,7 @@ create table {{adb_schema}}.time_dim
 with (orientation=column, appendonly=true)
 distributed by (t_time_sk);
 
-create table {{adb_schema}}.reason
+create table {{adb_schema_prefix}}_{{tpc_scale}}.reason
 (
     r_reason_sk               integer               not null,
     r_reason_id               char(16)              not null,
@@ -123,7 +123,7 @@ create table {{adb_schema}}.reason
 with (orientation=column, appendonly=true)
 distributed by (r_reason_sk);
 
-create table {{adb_schema}}.income_band
+create table {{adb_schema_prefix}}_{{tpc_scale}}.income_band
 (
     ib_income_band_sk         integer               not null,
     ib_lower_bound            integer                       ,
@@ -132,7 +132,7 @@ create table {{adb_schema}}.income_band
 with (orientation=column, appendonly=true)
 distributed by (ib_income_band_sk);
 
-create table {{adb_schema}}.item
+create table {{adb_schema_prefix}}_{{tpc_scale}}.item
 (
     i_item_sk                 integer               not null,
     i_item_id                 char(16)              not null,
@@ -160,7 +160,7 @@ create table {{adb_schema}}.item
 with (orientation=column, appendonly=true)
 distributed by (i_item_sk);
 
-create table {{adb_schema}}.store
+create table {{adb_schema_prefix}}_{{tpc_scale}}.store
 (
     s_store_sk                integer               not null,
     s_store_id                char(16)              not null,
@@ -195,7 +195,7 @@ create table {{adb_schema}}.store
 with (orientation=column, appendonly=true)
 distributed by (s_store_sk);
 
-create table {{adb_schema}}.call_center
+create table {{adb_schema_prefix}}_{{tpc_scale}}.call_center
 (
     cc_call_center_sk         integer               not null,
     cc_call_center_id         char(16)              not null,
@@ -232,7 +232,7 @@ create table {{adb_schema}}.call_center
 with (orientation=column, appendonly=true)
 distributed by (cc_call_center_sk);
 
-create table {{adb_schema}}.customer
+create table {{adb_schema_prefix}}_{{tpc_scale}}.customer
 (
     c_customer_sk             integer               not null,
     c_customer_id             char(16)              not null,
@@ -256,7 +256,7 @@ create table {{adb_schema}}.customer
 with (orientation=column, appendonly=true)
 distributed by (c_customer_sk);
 
-create table {{adb_schema}}.web_site
+create table {{adb_schema_prefix}}_{{tpc_scale}}.web_site
 (
     web_site_sk               integer               not null,
     web_site_id               char(16)              not null,
@@ -288,7 +288,7 @@ create table {{adb_schema}}.web_site
 with (orientation=column, appendonly=true)
 distributed by (web_site_sk);
 
-create table {{adb_schema}}.store_returns
+create table {{adb_schema_prefix}}_{{tpc_scale}}.store_returns
 (
     sr_returned_date_sk       integer                       ,
     sr_return_time_sk         integer                       ,
@@ -319,7 +319,7 @@ partition by range (sr_returned_date_sk)
     default partition others
 );
 
-create table {{adb_schema}}.household_demographics
+create table {{adb_schema_prefix}}_{{tpc_scale}}.household_demographics
 (
     hd_demo_sk                integer               not null,
     hd_income_band_sk         integer                       ,
@@ -330,7 +330,7 @@ create table {{adb_schema}}.household_demographics
 with (orientation=column, appendonly=true)
 distributed by (hd_demo_sk);
 
-create table {{adb_schema}}.web_page
+create table {{adb_schema_prefix}}_{{tpc_scale}}.web_page
 (
     wp_web_page_sk            integer               not null,
     wp_web_page_id            char(16)              not null,
@@ -350,7 +350,7 @@ create table {{adb_schema}}.web_page
 with (orientation=column, appendonly=true)
 distributed by (wp_web_page_sk);
 
-create table {{adb_schema}}.promotion
+create table {{adb_schema_prefix}}_{{tpc_scale}}.promotion
 (
     p_promo_sk                integer               not null,
     p_promo_id                char(16)              not null,
@@ -375,7 +375,7 @@ create table {{adb_schema}}.promotion
 with (orientation=column, appendonly=true)
 distributed by (p_promo_sk);
 
-create table {{adb_schema}}.catalog_page
+create table {{adb_schema_prefix}}_{{tpc_scale}}.catalog_page
 (
     cp_catalog_page_sk        integer               not null,
     cp_catalog_page_id        char(16)              not null,
@@ -390,7 +390,7 @@ create table {{adb_schema}}.catalog_page
 with (orientation=column, appendonly=true)
 distributed by (cp_catalog_page_sk);
 
-create table {{adb_schema}}.inventory
+create table {{adb_schema_prefix}}_{{tpc_scale}}.inventory
 (
     inv_date_sk               integer               not null,
     inv_item_sk               integer               not null,
@@ -405,7 +405,7 @@ partition by range (inv_date_sk)
     default partition others
 );
 
-create table {{adb_schema}}.catalog_returns
+create table {{adb_schema_prefix}}_{{tpc_scale}}.catalog_returns
 (
     cr_returned_date_sk       integer                       ,
     cr_returned_time_sk       integer                       ,
@@ -443,7 +443,7 @@ partition by range (cr_returned_date_sk)
     default partition others
 );
 
-create table {{adb_schema}}.web_returns
+create table {{adb_schema_prefix}}_{{tpc_scale}}.web_returns
 (
     wr_returned_date_sk       integer                       ,
     wr_returned_time_sk       integer                       ,
@@ -478,7 +478,7 @@ partition by range (wr_returned_date_sk)
     default partition others
 );
 
-create table {{adb_schema}}.web_sales
+create table {{adb_schema_prefix}}_{{tpc_scale}}.web_sales
 (
     ws_sold_date_sk           integer                       ,
     ws_sold_time_sk           integer                       ,
@@ -523,7 +523,7 @@ partition by range (ws_sold_date_sk)
     default partition others
 );
 
-create table {{adb_schema}}.catalog_sales
+create table {{adb_schema_prefix}}_{{tpc_scale}}.catalog_sales
 (
     cs_sold_date_sk           integer                       ,
     cs_sold_time_sk           integer                       ,
@@ -568,7 +568,7 @@ partition by range (cs_sold_date_sk)
     default partition others
 );
 
-create table {{adb_schema}}.store_sales
+create table {{adb_schema_prefix}}_{{tpc_scale}}.store_sales
 (
     ss_sold_date_sk           integer                       ,
     ss_sold_time_sk           integer                       ,

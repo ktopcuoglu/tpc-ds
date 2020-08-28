@@ -1,4 +1,4 @@
-create readable external table {{adb_schema}}.ext_customer_address
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer_address
 (
     ca_address_sk             integer                       ,
     ca_address_id             char(16)                      ,
@@ -18,7 +18,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/c
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_customer_demographics
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer_demographics
 (
     cd_demo_sk                integer                       ,
     cd_gender                 char(1)                       ,
@@ -34,7 +34,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/c
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_date_dim
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_date_dim
 (
     d_date_sk                 integer                       ,
     d_date_id                 char(16)                      ,
@@ -69,7 +69,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/d
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_warehouse
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_warehouse
 (
     w_warehouse_sk            integer                       ,
     w_warehouse_id            char(16)                      ,
@@ -90,7 +90,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/w
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_ship_mode
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_ship_mode
 (
     sm_ship_mode_sk           integer                       ,
     sm_ship_mode_id           char(16)                      ,
@@ -103,7 +103,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/s
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_time_dim
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_time_dim
 (
     t_time_sk                 integer                       ,
     t_time_id                 char(16)                      ,
@@ -120,7 +120,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/t
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_reason
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_reason
 (
     r_reason_sk               integer                       ,
     r_reason_id               char(16)                      ,
@@ -130,7 +130,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/r
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_income_band
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_income_band
 (
     ib_income_band_sk         integer                       ,
     ib_lower_bound            integer                       ,
@@ -140,7 +140,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/i
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_item
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_item
 (
     i_item_sk                 integer                       ,
     i_item_id                 char(16)                      ,
@@ -169,7 +169,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/i
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_store
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store
 (
     s_store_sk                integer                       ,
     s_store_id                char(16)                      ,
@@ -205,7 +205,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/s
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_call_center
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_call_center
 (
     cc_call_center_sk         integer                       ,
     cc_call_center_id         char(16)                      ,
@@ -243,7 +243,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/c
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_customer
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer
 (
     c_customer_sk             integer                       ,
     c_customer_id             char(16)                      ,
@@ -268,7 +268,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/c
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_web_site
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_site
 (
     web_site_sk               integer                       ,
     web_site_id               char(16)                      ,
@@ -301,7 +301,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/w
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_store_returns
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store_returns
 (
     sr_returned_date_sk       integer                       ,
     sr_return_time_sk         integer                       ,
@@ -328,7 +328,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/s
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_household_demographics
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_household_demographics
 (
     hd_demo_sk                integer                       ,
     hd_income_band_sk         integer                       ,
@@ -340,7 +340,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/h
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_web_page
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_page
 (
     wp_web_page_sk            integer                       ,
     wp_web_page_id            char(16)                      ,
@@ -361,7 +361,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/w
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_promotion
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_promotion
 (
     p_promo_sk                integer                       ,
     p_promo_id                char(16)                      ,
@@ -387,7 +387,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/p
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_catalog_page
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_page
 (
     cp_catalog_page_sk        integer                       ,
     cp_catalog_page_id        char(16)                      ,
@@ -403,7 +403,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/c
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_inventory
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_inventory
 (
     inv_date_sk               integer                       ,
     inv_item_sk               integer                       ,
@@ -414,7 +414,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/i
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_catalog_returns
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_returns
 (
     cr_returned_date_sk       integer                       ,
     cr_returned_time_sk       integer                       ,
@@ -448,7 +448,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/c
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_web_returns
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_returns
 (
     wr_returned_date_sk       integer                       ,
     wr_returned_time_sk       integer                       ,
@@ -479,7 +479,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/w
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_web_sales
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_sales
 (
     ws_sold_date_sk           integer                       ,
     ws_sold_time_sk           integer                       ,
@@ -520,7 +520,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/w
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_catalog_sales
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_sales
 (
     cs_sold_date_sk           integer                       ,
     cs_sold_time_sk           integer                       ,
@@ -561,7 +561,7 @@ location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/c
 FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
 ENCODING 'utf8';
 
-create readable external table {{adb_schema}}.ext_store_sales
+create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store_sales
 (
     ss_sold_date_sk           integer                       ,
     ss_sold_time_sk           integer                       ,
