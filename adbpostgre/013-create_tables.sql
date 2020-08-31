@@ -1,4 +1,6 @@
-create table {{adb_schema_prefix}}_{{tpc_scale}}.customer_address
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
 (
     ca_address_sk             integer               not null,
     ca_address_id             char(16)              not null,
@@ -17,7 +19,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.customer_address
 with (orientation=column, appendonly=true)
 distributed by (ca_address_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.customer_demographics
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics
 (
     cd_demo_sk                integer               not null,
     cd_gender                 char(1)                       ,
@@ -32,7 +36,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.customer_demographics
 with (orientation=column, appendonly=true)
 distributed by (cd_demo_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.date_dim
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
 (
     d_date_sk                 integer               not null,
     d_date_id                 char(16)              not null,
@@ -66,7 +72,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.date_dim
 with (orientation=column, appendonly=true)
 distributed by (d_date_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.warehouse
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.warehouse cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.warehouse
 (
     w_warehouse_sk            integer               not null,
     w_warehouse_id            char(16)              not null,
@@ -86,7 +94,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.warehouse
 with (orientation=column, appendonly=true)
 distributed by (w_warehouse_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.ship_mode
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ship_mode cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.ship_mode
 (
     sm_ship_mode_sk           integer               not null,
     sm_ship_mode_id           char(16)              not null,
@@ -98,7 +108,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.ship_mode
 with (orientation=column, appendonly=true)
 distributed by (sm_ship_mode_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.time_dim
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim
 (
     t_time_sk                 integer               not null,
     t_time_id                 char(16)              not null,
@@ -114,7 +126,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.time_dim
 with (orientation=column, appendonly=true)
 distributed by (t_time_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.reason
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.reason cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.reason
 (
     r_reason_sk               integer               not null,
     r_reason_id               char(16)              not null,
@@ -123,7 +137,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.reason
 with (orientation=column, appendonly=true)
 distributed by (r_reason_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.income_band
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.income_band cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.income_band
 (
     ib_income_band_sk         integer               not null,
     ib_lower_bound            integer                       ,
@@ -132,7 +148,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.income_band
 with (orientation=column, appendonly=true)
 distributed by (ib_income_band_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.item
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.item cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.item
 (
     i_item_sk                 integer               not null,
     i_item_id                 char(16)              not null,
@@ -160,7 +178,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.item
 with (orientation=column, appendonly=true)
 distributed by (i_item_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.store
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.store cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.store
 (
     s_store_sk                integer               not null,
     s_store_id                char(16)              not null,
@@ -195,7 +215,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.store
 with (orientation=column, appendonly=true)
 distributed by (s_store_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.call_center
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.call_center cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.call_center
 (
     cc_call_center_sk         integer               not null,
     cc_call_center_id         char(16)              not null,
@@ -232,7 +254,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.call_center
 with (orientation=column, appendonly=true)
 distributed by (cc_call_center_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.customer
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.customer cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.customer
 (
     c_customer_sk             integer               not null,
     c_customer_id             char(16)              not null,
@@ -256,7 +280,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.customer
 with (orientation=column, appendonly=true)
 distributed by (c_customer_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.web_site
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.web_site cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.web_site
 (
     web_site_sk               integer               not null,
     web_site_id               char(16)              not null,
@@ -288,7 +314,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.web_site
 with (orientation=column, appendonly=true)
 distributed by (web_site_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.store_returns
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.store_returns cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
 (
     sr_returned_date_sk       integer                       ,
     sr_return_time_sk         integer                       ,
@@ -319,7 +347,9 @@ partition by range (sr_returned_date_sk)
     default partition others
 );
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.household_demographics
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics
 (
     hd_demo_sk                integer               not null,
     hd_income_band_sk         integer                       ,
@@ -330,7 +360,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.household_demographics
 with (orientation=column, appendonly=true)
 distributed by (hd_demo_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.web_page
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.web_page cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.web_page
 (
     wp_web_page_sk            integer               not null,
     wp_web_page_id            char(16)              not null,
@@ -350,7 +382,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.web_page
 with (orientation=column, appendonly=true)
 distributed by (wp_web_page_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.promotion
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.promotion cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.promotion
 (
     p_promo_sk                integer               not null,
     p_promo_id                char(16)              not null,
@@ -375,7 +409,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.promotion
 with (orientation=column, appendonly=true)
 distributed by (p_promo_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.catalog_page
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_page cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_page
 (
     cp_catalog_page_sk        integer               not null,
     cp_catalog_page_id        char(16)              not null,
@@ -390,7 +426,9 @@ create table {{adb_schema_prefix}}_{{tpc_scale}}.catalog_page
 with (orientation=column, appendonly=true)
 distributed by (cp_catalog_page_sk);
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.inventory
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.inventory cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.inventory
 (
     inv_date_sk               integer               not null,
     inv_item_sk               integer               not null,
@@ -405,7 +443,9 @@ partition by range (inv_date_sk)
     default partition others
 );
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.catalog_returns
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns
 (
     cr_returned_date_sk       integer                       ,
     cr_returned_time_sk       integer                       ,
@@ -443,7 +483,9 @@ partition by range (cr_returned_date_sk)
     default partition others
 );
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.web_returns
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.web_returns cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.web_returns
 (
     wr_returned_date_sk       integer                       ,
     wr_returned_time_sk       integer                       ,
@@ -478,7 +520,9 @@ partition by range (wr_returned_date_sk)
     default partition others
 );
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.web_sales
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales
 (
     ws_sold_date_sk           integer                       ,
     ws_sold_time_sk           integer                       ,
@@ -523,7 +567,9 @@ partition by range (ws_sold_date_sk)
     default partition others
 );
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.catalog_sales
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
 (
     cs_sold_date_sk           integer                       ,
     cs_sold_time_sk           integer                       ,
@@ -568,7 +614,9 @@ partition by range (cs_sold_date_sk)
     default partition others
 );
 
-create table {{adb_schema_prefix}}_{{tpc_scale}}.store_sales
+drop table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales cascade;
+
+create table {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
 (
     ss_sold_date_sk           integer                       ,
     ss_sold_time_sk           integer                       ,

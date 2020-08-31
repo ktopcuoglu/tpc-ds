@@ -1,4 +1,6 @@
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer_address
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_customer_address;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_customer_address
 (
     ca_address_sk             integer                       ,
     ca_address_id             char(16)                      ,
@@ -15,10 +17,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer_
     ca_location_type          char(20)                      
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/customer_address/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer_demographics
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_customer_demographics;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_customer_demographics
 (
     cd_demo_sk                integer                       ,
     cd_gender                 char(1)                       ,
@@ -31,10 +35,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer_
     cd_dep_college_count      integer                       
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/customer_demographics/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_date_dim
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_date_dim;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_date_dim
 (
     d_date_sk                 integer                       ,
     d_date_id                 char(16)                      ,
@@ -66,10 +72,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_date_dim
     d_current_year            char(1)                       
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/date_dim/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_warehouse
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_warehouse;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_warehouse
 (
     w_warehouse_sk            integer                       ,
     w_warehouse_id            char(16)                      ,
@@ -87,10 +95,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_warehouse
     w_gmt_offset              decimal(5,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/warehouse/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_ship_mode
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_ship_mode;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_ship_mode
 (
     sm_ship_mode_sk           integer                       ,
     sm_ship_mode_id           char(16)                      ,
@@ -100,10 +110,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_ship_mode
     sm_contract               char(20)                      
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/ship_mode/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_time_dim
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_time_dim;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_time_dim
 (
     t_time_sk                 integer                       ,
     t_time_id                 char(16)                      ,
@@ -117,30 +129,36 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_time_dim
     t_meal_time               char(20)                      
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/time_dim/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_reason
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_reason;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_reason
 (
     r_reason_sk               integer                       ,
     r_reason_id               char(16)                      ,
     r_reason_desc             char(100)                     
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/reason/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_income_band
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_income_band;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_income_band
 (
     ib_income_band_sk         integer                       ,
     ib_lower_bound            integer                       ,
     ib_upper_bound            integer                       
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/income_band/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_item
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_item;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_item
 (
     i_item_sk                 integer                       ,
     i_item_id                 char(16)                      ,
@@ -166,10 +184,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_item
     i_product_name            char(50)                      
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/item/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_store;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_store
 (
     s_store_sk                integer                       ,
     s_store_id                char(16)                      ,
@@ -202,10 +222,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store
     s_tax_precentage          decimal(5,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/store/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_call_center
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_call_center;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_call_center
 (
     cc_call_center_sk         integer                       ,
     cc_call_center_id         char(16)                      ,
@@ -240,10 +262,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_call_cent
     cc_tax_percentage         decimal(5,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/call_center/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_customer;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_customer
 (
     c_customer_sk             integer                       ,
     c_customer_id             char(16)                      ,
@@ -265,10 +289,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_customer
     c_last_review_date        char(10)                      
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/customer/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_site
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_web_site;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_web_site
 (
     web_site_sk               integer                       ,
     web_site_id               char(16)                      ,
@@ -298,10 +324,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_site
     web_tax_percentage        decimal(5,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/web_site/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store_returns
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_store_returns;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_store_returns
 (
     sr_returned_date_sk       integer                       ,
     sr_return_time_sk         integer                       ,
@@ -325,10 +353,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store_ret
     sr_net_loss               decimal(7,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/store_returns/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_household_demographics
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_household_demographics;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_household_demographics
 (
     hd_demo_sk                integer                       ,
     hd_income_band_sk         integer                       ,
@@ -337,10 +367,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_household
     hd_vehicle_count          integer                       
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/household_demographics/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_page
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_web_page;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_web_page
 (
     wp_web_page_sk            integer                       ,
     wp_web_page_id            char(16)                      ,
@@ -358,10 +390,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_page
     wp_max_ad_count           integer                       
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/web_page/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_promotion
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_promotion;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_promotion
 (
     p_promo_sk                integer                       ,
     p_promo_id                char(16)                      ,
@@ -384,10 +418,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_promotion
     p_discount_active         char(1)                       
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/promotion/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_page
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_catalog_page;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_catalog_page
 (
     cp_catalog_page_sk        integer                       ,
     cp_catalog_page_id        char(16)                      ,
@@ -400,10 +436,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_p
     cp_type                   varchar(100)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/catalog_page/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_inventory
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_inventory;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_inventory
 (
     inv_date_sk               integer                       ,
     inv_item_sk               integer                       ,
@@ -411,10 +449,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_inventory
     inv_quantity_on_hand      integer                       
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/inventory/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_returns
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_catalog_returns;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_catalog_returns
 (
     cr_returned_date_sk       integer                       ,
     cr_returned_time_sk       integer                       ,
@@ -445,10 +485,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_r
     cr_net_loss               decimal(7,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/catalog_returns/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_returns
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_web_returns;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_web_returns
 (
     wr_returned_date_sk       integer                       ,
     wr_returned_time_sk       integer                       ,
@@ -476,10 +518,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_retur
     wr_net_loss               decimal(7,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/web_returns/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_sales
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_web_sales;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_web_sales
 (
     ws_sold_date_sk           integer                       ,
     ws_sold_time_sk           integer                       ,
@@ -517,10 +561,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_web_sales
     ws_net_profit             decimal(7,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/web_sales/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_sales
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_catalog_sales;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_catalog_sales
 (
     cs_sold_date_sk           integer                       ,
     cs_sold_time_sk           integer                       ,
@@ -558,10 +604,12 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_catalog_s
     cs_net_profit             decimal(7,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/catalog_sales/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
-create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store_sales
+drop external table if exists {{tpc_schema_prefix}}_{{tpc_scale}}.ext_store_sales;
+
+create readable external table {{tpc_schema_prefix}}_{{tpc_scale}}.ext_store_sales
 (
     ss_sold_date_sk           integer                       ,
     ss_sold_time_sk           integer                       ,
@@ -588,6 +636,6 @@ create readable external table {{adb_schema_prefix}}_{{tpc_scale}}.ext_store_sal
     ss_net_profit             decimal(7,2)                  
 )
 location('oss://oss-eu-central-1.aliyuncs.com prefix=tpcds/tpcds_{{tpc_scale}}/store_sales/ id={{oss_id}} key={{oss_key}} bucket={{oss_bucket}}')
-FORMAT 'csv' (QUOTE '''' DELIMITER E'|')
-ENCODING 'utf8';
+FORMAT 'csv' (DELIMITER E'|')
+ENCODING 'latin1';
 
