@@ -13,9 +13,9 @@ with my_customers as (
                  ws_item_sk item_sk
           from   {{tpc_schema}}.web_sales
          ) cs_or_ws_sales,
-         item,
-         date_dim,
-         customer
+         {{tpc_schema}}.item,
+         {{tpc_schema}}.date_dim,
+         {{tpc_schema}}.customer
  where   sold_date_sk = d_date_sk
          and item_sk = i_item_sk
          and i_category = 'Jewelry'
@@ -52,5 +52,3 @@ with my_customers as (
  group by segment
  order by segment, num_customers
  limit 100;
-
-

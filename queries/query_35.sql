@@ -28,7 +28,7 @@ select ca_state,
                  where c.c_customer_sk = ss_customer_sk
                        and ss_sold_date_sk = d_date_sk
                        and d_year = 1999
-                       andd d_qoy < 4
+                       and d_qoy < 4
                ) 
     and (exists (select *
                    from {{tpc_schema}}.web_sales

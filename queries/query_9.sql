@@ -44,7 +44,7 @@ select case when (select count(*)
             else (select avg(ss_net_profit)
                   from {{tpc_schema}}.store_sales
                   where ss_quantity between 81 and 100) end bucket5
-from reason
+from {{tpc_schema}}.reason
 where r_reason_sk = 1
 ;
 

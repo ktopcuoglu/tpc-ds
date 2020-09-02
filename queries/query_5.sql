@@ -22,11 +22,11 @@ with ssr as
            sr_net_loss as net_loss
     from {{tpc_schema}}.store_returns
    ) salesreturns,
-     date_dim,
-     store
+     {{tpc_schema}}.date_dim,
+     {{tpc_schema}}.store
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
-                  and (cast('1998-08-04' as date) +  14 days)
+                  and (cast('1998-08-04' as date) +  interval '14 day')
        and store_sk = s_store_sk
  group by s_store_id)
  ,
@@ -53,11 +53,11 @@ with ssr as
            cr_net_loss as net_loss
     from {{tpc_schema}}.catalog_returns
    ) salesreturns,
-     date_dim,
-     catalog_page
+     {{tpc_schema}}.date_dim,
+     {{tpc_schema}}.catalog_page
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  14 days)
+                  and (cast('1998-08-04' as date) +  interval '14 day')
        and page_sk = cp_catalog_page_sk
  group by cp_catalog_page_id)
  ,
@@ -90,7 +90,7 @@ with ssr as
      {{tpc_schema}}.web_site
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  14 days)
+                  and (cast('1998-08-04' as date) +  interval '14 day')
        and wsr_web_site_sk = web_site_sk
  group by web_site_id)
   select  channel

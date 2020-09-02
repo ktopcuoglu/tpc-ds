@@ -9,7 +9,7 @@ with ss as (
          {{tpc_schema}}.item
  where
          i_item_id in (select i_item_id
-                         from item
+                         from {{tpc_schema}}.item
                         where i_category in ('Children'))
      and     ss_item_sk              = i_item_sk
      and     ss_sold_date_sk         = d_date_sk
@@ -27,10 +27,9 @@ with ss as (
          {{tpc_schema}}.customer_address,
          {{tpc_schema}}.item
  where
-         i_item_id               in (select
-  i_item_id
-from {{tpc_schema}}.item
-where i_category in ('Children'))
+         i_item_id               in (select i_item_id
+                                       from {{tpc_schema}}.item
+                                      where i_category in ('Children'))
  and     cs_item_sk              = i_item_sk
  and     cs_sold_date_sk         = d_date_sk
  and     d_year                  = 1999
@@ -47,10 +46,9 @@ where i_category in ('Children'))
          {{tpc_schema}}.customer_address,
          {{tpc_schema}}.item
  where
-         i_item_id               in (select
-  i_item_id
-from {{tpc_schema}}.item
-where i_category in ('Children'))
+         i_item_id               in (select i_item_id
+                                       from {{tpc_schema}}.item
+                                      where i_category in ('Children'))
  and     ws_item_sk              = i_item_sk
  and     ws_sold_date_sk         = d_date_sk
  and     d_year                  = 1999

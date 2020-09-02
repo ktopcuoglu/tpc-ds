@@ -121,7 +121,7 @@ select  channel, {{tpc_schema}}.item, return_ratio, return_rank, currency_rank f
  or 
  store.currency_rank <= 10
  )
- )
+ ) q1
  order by 1,4,5,2
  limit 100;
 

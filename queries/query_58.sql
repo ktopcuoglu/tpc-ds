@@ -30,7 +30,7 @@ with ss_items as
  ws_items as
  (select i_item_id item_id
         ,sum(ws_ext_sales_price) ws_item_rev
-  from web_sales
+  from {{tpc_schema}}.web_sales
       ,{{tpc_schema}}.item
       ,{{tpc_schema}}.date_dim
  where ws_item_sk = i_item_sk

@@ -1,1 +1,5 @@
 environment.sh
+.gcloud-config
+/errors
+gcp_service_account.json
+/results

@@ -14,7 +14,7 @@ with customer_total_return as
   select  c_customer_id,c_salutation,c_first_name,c_last_name,c_preferred_cust_flag
        ,c_birth_day,c_birth_month,c_birth_year,c_birth_country,c_login,c_email_address
        ,c_last_review_date_sk,ctr_total_return
- from {{tpc_schema}}.customer_total_return ctr1
+ from customer_total_return ctr1
      ,{{tpc_schema}}.customer_address
      ,{{tpc_schema}}.customer
  where ctr1.ctr_total_return > (select avg(ctr_total_return)*1.2

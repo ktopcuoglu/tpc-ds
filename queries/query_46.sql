@@ -25,7 +25,9 @@ select  c_last_name
     and date_dim.d_dow in (6,0)
     and date_dim.d_year in (1999,1999+1,1999+2) 
     and store.s_city in ('Midway','Fairview','Fairview','Midway','Fairview') 
-  group by ss_ticket_number,ss_customer_sk,ss_addr_sk,ca_city) dn, {{tpc_schema}}.customer,customer_address current_addr
+  group by ss_ticket_number,ss_customer_sk,ss_addr_sk,ca_city) dn
+  , {{tpc_schema}}.customer
+  , {{tpc_schema}}.customer_address current_addr
     where ss_customer_sk = c_customer_sk
       and customer.c_current_addr_sk = current_addr.ca_address_sk
       and current_addr.ca_city <> bought_city

@@ -27,7 +27,7 @@ select i_brand_id brand_id, i_brand brand,t_hour,t_minute,
                  where d_date_sk = ss_sold_date_sk
                    and d_moy=12
                    and d_year=2000
-                 ) tmp,time_dim
+                 ) tmp,{{tpc_schema}}.time_dim
  where
    sold_item_sk = i_item_sk
    and i_manager_id=1
