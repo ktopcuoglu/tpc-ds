@@ -23,7 +23,7 @@ and exists (select *
             where cs1.cs_order_number = cs2.cs_order_number
               and cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk)
 and not exists(select *
-               from catalog_returns cr1
+               from {{tpc_schema}}.catalog_returns cr1
                where cs1.cs_order_number = cr1.cr_order_number)
 order by count(distinct cs_order_number)
 limit 100;
