@@ -46,7 +46,7 @@ group by cp_catalog_page_id)
           sum(ws_ext_sales_price) as sales,
           sum(coalesce(wr_return_amt, 0)) as returns,
           sum(ws_net_profit - coalesce(wr_net_loss, 0)) as profit
-  from web_sales left outer join web_returns on
+  from {{tpc_schema}}.web_sales left outer join {{tpc_schema}}.web_returns on
          (ws_item_sk = wr_item_sk and ws_order_number = wr_order_number),
      {{tpc_schema}}.date_dim,
      {{tpc_schema}}.web_site,

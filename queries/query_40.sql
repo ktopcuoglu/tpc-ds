@@ -7,7 +7,7 @@ select
   ,sum(case when (cast(d_date as date) >= cast ('1998-04-08' as date)) 
  		then cs_sales_price - coalesce(cr_refunded_cash,0) else 0 end) as sales_after
  from {{tpc_schema}}.catalog_sales 
-            left outer join catalog_returns on (cs_order_number = cr_order_number 
+            left outer join {{tpc_schema}}.catalog_returns on (cs_order_number = cr_order_number 
                                                 and cs_item_sk = cr_item_sk)
       ,{{tpc_schema}}.warehouse 
       ,{{tpc_schema}}.item

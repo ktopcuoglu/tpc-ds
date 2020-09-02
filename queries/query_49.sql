@@ -86,10 +86,10 @@ select  channel, {{tpc_schema}}.item, return_ratio, return_rank, currency_rank f
  union
  select 
  'store' as channel
- ,{{tpc_schema}}.store.item
- ,{{tpc_schema}}.store.return_ratio
- ,{{tpc_schema}}.store.return_rank
- ,{{tpc_schema}}.store.currency_rank
+ ,store.item
+ ,store.return_ratio
+ ,store.return_rank
+ ,store.currency_rank
  from (
      select 
       item
