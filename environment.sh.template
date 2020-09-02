@@ -1,12 +1,25 @@
-#tpc configs
-export tpc_scale=1000
+export TPCDS_HOME="$( cd "$(dirname "$0")" ; pwd -P )"
+
+export tpc_scale=100
+export tpc_schema_prefix=tpcds
+export tpc_schema=${tpc_schema_prefix}_${tpc_scale}
 
 #adbpostgre configs
 export adb_host=
-export adb_port=
-export adb_user=
+export adb_port=3432
+export adb_user=tpcds
 export adb_pass=
-export adb_schema=
+export adb_db=tpcds
 export oss_id=
 export oss_key=
 export oss_bucket=
+export PGPASSWORD=$adb_pass
+
+#bigquery configs
+export CLOUDSDK_CONFIG=$TPCDS_HOME/.gcloud-config
+export GOOGLE_APPLICATION_CREDENTIALS=$TPCDS_HOME/resources/gcp_service_account.json
+export bq_project=
+export bq_location=eu
+gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+
+source $TPCDS_HOME/tpc_aliases.sh
