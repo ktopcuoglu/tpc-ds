@@ -3,3 +3,4 @@ environment.sh
 /errors
 gcp_service_account.json
 /results
+*.code-workspace
