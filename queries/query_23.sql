@@ -7,7 +7,7 @@ with frequent_ss_items as
   where ss_sold_date_sk = d_date_sk
     and ss_item_sk = i_item_sk 
     and d_year in (1999,1999+1,1999+2,1999+3)
-  group by substr(i_item_desc,1,30),i_item_sk,d_date
+  group by 1,i_item_sk,d_date
   having count(*) >4),
  max_store_sales as
  (select max(csales) tpcds_cmax 
@@ -25,10 +25,9 @@ with frequent_ss_items as
       ,{{tpc_schema}}.customer
   where ss_customer_sk = c_customer_sk
   group by c_customer_sk
-  having sum(ss_quantity*ss_sales_price) > (95/100.0) * (select
-  *
-from
- max_store_sales))
+  having sum(ss_quantity*ss_sales_price) > (95/100.0) * (select *
+                                                           from max_store_sales)
+)
   select  sum(sales)
  from (select cs_quantity*cs_list_price sales
        from {{tpc_schema}}.catalog_sales
@@ -56,7 +55,7 @@ with frequent_ss_items as
   where ss_sold_date_sk = d_date_sk
     and ss_item_sk = i_item_sk
     and d_year in (1999,1999 + 1,1999 + 2,1999 + 3)
-  group by substr(i_item_desc,1,30),i_item_sk,d_date
+  group by 1,i_item_sk,d_date
   having count(*) >4),
  max_store_sales as
  (select max(csales) tpcds_cmax

@@ -1,7 +1,7 @@
 
 select  dt.d_year
-       ,{{tpc_schema}}.item.i_category_id
-       ,{{tpc_schema}}.item.i_category
+       ,item.i_category_id
+       ,item.i_category
        ,sum(ss_ext_sales_price)
  from   {{tpc_schema}}.date_dim dt
        ,{{tpc_schema}}.store_sales

@@ -4,3 +4,6 @@ environment.sh
 gcp_service_account.json
 /results
 *.code-workspace
+/stderr
+/stdout
+*.csv

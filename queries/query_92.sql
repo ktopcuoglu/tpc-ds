@@ -1,6 +1,6 @@
 
 select  
-   sum(ws_ext_discount_amt)  as "Excess Discount Amount" 
+   sum(ws_ext_discount_amt)  as Excess_Discount_Amount
 from 
     {{tpc_schema}}.web_sales 
    ,{{tpc_schema}}.item 
@@ -8,8 +8,7 @@ from
 where
 i_manufact_id = 269
 and i_item_sk = ws_item_sk 
-and d_date between '1998-03-18' and 
-        (cast('1998-03-18' as date) + interval '90 day')
+and d_date between '1998-03-18' and  '1998-06-16'
 and d_date_sk = ws_sold_date_sk 
 and ws_ext_discount_amt  
      > ( 
@@ -20,8 +19,7 @@ and ws_ext_discount_amt
            ,{{tpc_schema}}.date_dim
          WHERE 
               ws_item_sk = i_item_sk 
-          and d_date between '1998-03-18' and
-                             (cast('1998-03-18' as date) + interval '90 day')
+          and d_date between '1998-03-18' and '1998-06-16'
           and d_date_sk = ws_sold_date_sk 
       ) 
 order by sum(ws_ext_discount_amt)

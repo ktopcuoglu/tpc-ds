@@ -1,4 +1,8 @@
-
+{% if tpc_dialect == "postgresql" %}
+    {% set decimaltype = 'decimal(17,2)' %}
+{% elif tpc_dialect == "bigquery" %}
+    {% set decimaltype = 'numeric' %}
+{% endif %}
 WITH all_sales AS (
  SELECT d_year
        ,i_brand_id
@@ -19,7 +23,7 @@ WITH all_sales AS (
                           LEFT JOIN {{tpc_schema}}.catalog_returns ON (cs_order_number=cr_order_number 
                                                     AND cs_item_sk=cr_item_sk)
        WHERE i_category='Sports'
-       UNION
+       UNION {{ 'distinct' if tpc_dialect == 'bigquery' }}  
        SELECT d_year
              ,i_brand_id
              ,i_class_id
@@ -32,7 +36,7 @@ WITH all_sales AS (
                         LEFT JOIN {{tpc_schema}}.store_returns ON (ss_ticket_number=sr_ticket_number 
                                                 AND ss_item_sk=sr_item_sk)
        WHERE i_category='Sports'
-       UNION
+       UNION {{ 'distinct' if tpc_dialect == 'bigquery' }}  
        SELECT d_year
              ,i_brand_id
              ,i_class_id
@@ -63,7 +67,7 @@ WITH all_sales AS (
    AND curr_yr.i_manufact_id=prev_yr.i_manufact_id
    AND curr_yr.d_year=2002
    AND prev_yr.d_year=2002-1
-   AND CAST(curr_yr.sales_cnt AS DECIMAL(17,2))/CAST(prev_yr.sales_cnt AS DECIMAL(17,2))<0.9
+   AND CAST(curr_yr.sales_cnt AS {{decimaltype}})/CAST(prev_yr.sales_cnt AS {{decimaltype}})<0.9
  ORDER BY sales_cnt_diff,sales_amt_diff
  limit 100;
 

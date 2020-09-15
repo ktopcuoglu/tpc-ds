@@ -40,5 +40,3 @@ order by i_category
         ,sumsales
         ,rk
 limit 100;
-
-

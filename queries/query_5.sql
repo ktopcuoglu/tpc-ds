@@ -1,3 +1,8 @@
+{% if tpc_dialect == "postgresql" %}
+    {% set decimaltype = 'decimal(7,2)' %}
+{% elif tpc_dialect == "bigquery" %}
+    {% set decimaltype = 'numeric' %}
+{% endif %}
 
 with ssr as
  (select s_store_id,
@@ -10,14 +15,14 @@ with ssr as
             ss_sold_date_sk  as date_sk,
             ss_ext_sales_price as sales_price,
             ss_net_profit as profit,
-            cast(0 as decimal(7,2)) as return_amt,
-            cast(0 as decimal(7,2)) as net_loss
+            cast(0 as {{decimaltype}}) as return_amt,
+            cast(0 as {{decimaltype}}) as net_loss
     from {{tpc_schema}}.store_sales
     union all
     select sr_store_sk as store_sk,
            sr_returned_date_sk as date_sk,
-           cast(0 as decimal(7,2)) as sales_price,
-           cast(0 as decimal(7,2)) as profit,
+           cast(0 as {{decimaltype}}) as sales_price,
+           cast(0 as {{decimaltype}}) as profit,
            sr_return_amt as return_amt,
            sr_net_loss as net_loss
     from {{tpc_schema}}.store_returns
@@ -26,10 +31,9 @@ with ssr as
      {{tpc_schema}}.store
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
-                  and (cast('1998-08-04' as date) +  interval '14 day')
+                  and cast('1998-08-18' as date)
        and store_sk = s_store_sk
- group by s_store_id)
- ,
+ group by s_store_id),
  csr as
  (select cp_catalog_page_id,
         sum(sales_price) as sales,
@@ -41,14 +45,14 @@ with ssr as
             cs_sold_date_sk  as date_sk,
             cs_ext_sales_price as sales_price,
             cs_net_profit as profit,
-            cast(0 as decimal(7,2)) as return_amt,
-            cast(0 as decimal(7,2)) as net_loss
+            cast(0 as {{decimaltype}}) as return_amt,
+            cast(0 as {{decimaltype}}) as net_loss
     from {{tpc_schema}}.catalog_sales
     union all
     select cr_catalog_page_sk as page_sk,
            cr_returned_date_sk as date_sk,
-           cast(0 as decimal(7,2)) as sales_price,
-           cast(0 as decimal(7,2)) as profit,
+           cast(0 as {{decimaltype}}) as sales_price,
+           cast(0 as {{decimaltype}}) as profit,
            cr_return_amount as return_amt,
            cr_net_loss as net_loss
     from {{tpc_schema}}.catalog_returns
@@ -57,10 +61,9 @@ with ssr as
      {{tpc_schema}}.catalog_page
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  interval '14 day')
+                  and cast('1998-08-18' as date)
        and page_sk = cp_catalog_page_sk
- group by cp_catalog_page_id)
- ,
+ group by cp_catalog_page_id),
  wsr as
  (select web_site_id,
         sum(sales_price) as sales,
@@ -72,14 +75,14 @@ with ssr as
             ws_sold_date_sk  as date_sk,
             ws_ext_sales_price as sales_price,
             ws_net_profit as profit,
-            cast(0 as decimal(7,2)) as return_amt,
-            cast(0 as decimal(7,2)) as net_loss
+            cast(0 as {{decimaltype}}) as return_amt,
+            cast(0 as {{decimaltype}}) as net_loss
     from {{tpc_schema}}.web_sales
     union all
     select ws_web_site_sk as wsr_web_site_sk,
            wr_returned_date_sk as date_sk,
-           cast(0 as decimal(7,2)) as sales_price,
-           cast(0 as decimal(7,2)) as profit,
+           cast(0 as {{decimaltype}}) as sales_price,
+           cast(0 as {{decimaltype}}) as profit,
            wr_return_amt as return_amt,
            wr_net_loss as net_loss
     from {{tpc_schema}}.web_returns left outer join {{tpc_schema}}.web_sales on
@@ -90,7 +93,7 @@ with ssr as
      {{tpc_schema}}.web_site
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  interval '14 day')
+                  and cast('1998-08-18' as date)
        and wsr_web_site_sk = web_site_sk
  group by web_site_id)
   select  channel
@@ -124,5 +127,3 @@ with ssr as
  order by channel
          ,id
  limit 100;
-
-

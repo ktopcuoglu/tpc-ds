@@ -1,5 +1,11 @@
+{% if tpc_dialect == "postgresql" %}
+    {% set decimaltype = 'decimal(15,2)' %}
+{% elif tpc_dialect == "bigquery" %}
+    {% set decimaltype = 'numeric' %}
+{% endif %}
 
-select  channel, {{tpc_schema}}.item, return_ratio, return_rank, currency_rank from
+select  channel, item, return_ratio, return_rank, currency_rank 
+from
  (select
  'web' as channel
  ,web.item
@@ -15,10 +21,10 @@ select  channel, {{tpc_schema}}.item, return_ratio, return_rank, currency_rank f
      ,rank() over (order by currency_ratio) as currency_rank
      from
      (    select ws.ws_item_sk as item
-         ,(cast(sum(coalesce(wr.wr_return_quantity,0)) as decimal(15,4))/
-         cast(sum(coalesce(ws.ws_quantity,0)) as decimal(15,4) )) as return_ratio
-         ,(cast(sum(coalesce(wr.wr_return_amt,0)) as decimal(15,4))/
-         cast(sum(coalesce(ws.ws_net_paid,0)) as decimal(15,4) )) as currency_ratio
+         ,(cast(sum(coalesce(wr.wr_return_quantity,0)) as {{decimaltype}})/
+         cast(sum(coalesce(ws.ws_quantity,0)) as {{decimaltype}} )) as return_ratio
+         ,(cast(sum(coalesce(wr.wr_return_amt,0)) as {{decimaltype}})/
+         cast(sum(coalesce(ws.ws_net_paid,0)) as {{decimaltype}} )) as currency_ratio
          from  {{tpc_schema}}.web_sales ws left outer join {{tpc_schema}}.web_returns wr 
              on (ws.ws_order_number = wr.wr_order_number and 
              ws.ws_item_sk = wr.wr_item_sk)
@@ -40,7 +46,7 @@ select  channel, {{tpc_schema}}.item, return_ratio, return_rank, currency_rank f
  or
  web.currency_rank <= 10
  )
- union
+ union {{ 'distinct' if tpc_dialect == 'bigquery' }}  
  select 
  'catalog' as channel
  ,catalog.item
@@ -57,10 +63,10 @@ select  channel, {{tpc_schema}}.item, return_ratio, return_rank, currency_rank f
      from
      (    select 
          cs.cs_item_sk as item
-         ,(cast(sum(coalesce(cr.cr_return_quantity,0)) as decimal(15,4))/
-         cast(sum(coalesce(cs.cs_quantity,0)) as decimal(15,4) )) as return_ratio
-         ,(cast(sum(coalesce(cr.cr_return_amount,0)) as decimal(15,4))/
-         cast(sum(coalesce(cs.cs_net_paid,0)) as decimal(15,4) )) as currency_ratio
+         ,(cast(sum(coalesce(cr.cr_return_quantity,0)) as {{decimaltype}})/
+         cast(sum(coalesce(cs.cs_quantity,0)) as {{decimaltype}} )) as return_ratio
+         ,(cast(sum(coalesce(cr.cr_return_amount,0)) as {{decimaltype}})/
+         cast(sum(coalesce(cs.cs_net_paid,0)) as {{decimaltype}} )) as currency_ratio
          from 
          {{tpc_schema}}.catalog_sales cs left outer join {{tpc_schema}}.catalog_returns cr
              on (cs.cs_order_number = cr.cr_order_number and 
@@ -83,7 +89,7 @@ select  channel, {{tpc_schema}}.item, return_ratio, return_rank, currency_rank f
  or
  catalog.currency_rank <=10
  )
- union
+ union {{ 'distinct' if tpc_dialect == 'bigquery' }}  
  select 
  'store' as channel
  ,store.item
@@ -99,8 +105,8 @@ select  channel, {{tpc_schema}}.item, return_ratio, return_rank, currency_rank f
      ,rank() over (order by currency_ratio) as currency_rank
      from
      (    select sts.ss_item_sk as item
-         ,(cast(sum(coalesce(sr.sr_return_quantity,0)) as decimal(15,4))/cast(sum(coalesce(sts.ss_quantity,0)) as decimal(15,4) )) as return_ratio
-         ,(cast(sum(coalesce(sr.sr_return_amt,0)) as decimal(15,4))/cast(sum(coalesce(sts.ss_net_paid,0)) as decimal(15,4) )) as currency_ratio
+         ,(cast(sum(coalesce(sr.sr_return_quantity,0)) as {{decimaltype}})/cast(sum(coalesce(sts.ss_quantity,0)) as {{decimaltype}} )) as return_ratio
+         ,(cast(sum(coalesce(sr.sr_return_amt,0)) as {{decimaltype}})/cast(sum(coalesce(sts.ss_net_paid,0)) as {{decimaltype}} )) as currency_ratio
          from 
          {{tpc_schema}}.store_sales sts left outer join {{tpc_schema}}.store_returns sr
              on (sts.ss_ticket_number = sr.sr_ticket_number and sts.ss_item_sk = sr.sr_item_sk)

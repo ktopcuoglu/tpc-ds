@@ -11,7 +11,7 @@ with  cross_items as
             where ss_item_sk = iss.i_item_sk
               and ss_sold_date_sk = d1.d_date_sk
               and d1.d_year between 1998 AND 1998 + 2
-            intersect 
+            intersect {{ 'distinct' if tpc_dialect == 'bigquery' }}  
           select ics.i_brand_id
               ,ics.i_class_id
               ,ics.i_category_id
@@ -21,7 +21,7 @@ with  cross_items as
           where cs_item_sk = ics.i_item_sk
             and cs_sold_date_sk = d2.d_date_sk
             and d2.d_year between 1998 AND 1998 + 2
-              intersect
+              intersect {{ 'distinct' if tpc_dialect == 'bigquery' }} 
             select iws.i_brand_id
                 ,iws.i_class_id
                 ,iws.i_category_id
@@ -113,7 +113,7 @@ with  cross_items as
  where ss_item_sk = iss.i_item_sk
    and ss_sold_date_sk = d1.d_date_sk
    and d1.d_year between 1998 AND 1998 + 2
- intersect
+ intersect {{ 'distinct' if tpc_dialect == 'bigquery' }} 
  select ics.i_brand_id
      ,ics.i_class_id
      ,ics.i_category_id
@@ -123,7 +123,7 @@ with  cross_items as
  where cs_item_sk = ics.i_item_sk
    and cs_sold_date_sk = d2.d_date_sk
    and d2.d_year between 1998 AND 1998 + 2
- intersect
+ intersect {{ 'distinct' if tpc_dialect == 'bigquery' }} 
  select iws.i_brand_id
      ,iws.i_class_id
      ,iws.i_category_id

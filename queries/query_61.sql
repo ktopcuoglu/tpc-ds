@@ -1,5 +1,9 @@
-
-select  promotions,total,cast(promotions as decimal(15,4))/cast(total as decimal(15,4))*100
+{% if tpc_dialect == "postgresql" %}
+    {% set decimaltype = 'decimal(15,2)' %}
+{% elif tpc_dialect == "bigquery" %}
+    {% set decimaltype = 'numeric' %}
+{% endif %}
+select  promotions,total,cast(promotions as {{decimaltype}})/cast(total as {{decimaltype}})*100
 from
   (select sum(ss_ext_sales_price) promotions
    from  {{tpc_schema}}.store_sales
@@ -40,5 +44,3 @@ from
    and   d_moy  = 11) all_sales
 order by promotions, total
 limit 100;
-
-

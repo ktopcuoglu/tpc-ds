@@ -1,16 +1,15 @@
 
 select  
-   count(distinct cs_order_number) as "order count"
-  ,sum(cs_ext_ship_cost) as "total shipping cost"
-  ,sum(cs_net_profit) as "total net profit"
+   count(distinct cs_order_number) as order_count
+  ,sum(cs_ext_ship_cost) as total_shipping_cost
+  ,sum(cs_net_profit) as total_net_profit
 from
    {{tpc_schema}}.catalog_sales cs1
   ,{{tpc_schema}}.date_dim
   ,{{tpc_schema}}.customer_address
   ,{{tpc_schema}}.call_center
 where
-    d_date between '1999-2-01' and 
-           (cast('1999-2-01' as date) + interval '60 day')
+    d_date between '1999-02-01' and  cast('1999-04-02' as date)
 and cs1.cs_ship_date_sk = d_date_sk
 and cs1.cs_ship_addr_sk = ca_address_sk
 and ca_state = 'IL'

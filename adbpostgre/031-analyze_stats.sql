@@ -1,0 +1,25 @@
+\timing
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.warehouse;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.ship_mode;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.reason;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.income_band;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.item;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.store;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.call_center;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.customer;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.web_site;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.store_returns;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.web_page;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.promotion;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_page;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.inventory;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.web_returns;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales;
+analyze fullscan {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales;

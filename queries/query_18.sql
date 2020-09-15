@@ -1,15 +1,20 @@
+{% if tpc_dialect == "postgresql" %}
+    {% set decimaltype = 'decimal(12,2)' %}
+{% elif tpc_dialect == "bigquery" %}
+    {% set decimaltype = 'numeric' %}
+{% endif %}
 
 select  i_item_id,
         ca_country,
         ca_state, 
         ca_county,
-        avg( cast(cs_quantity as decimal(12,2))) agg1,
-        avg( cast(cs_list_price as decimal(12,2))) agg2,
-        avg( cast(cs_coupon_amt as decimal(12,2))) agg3,
-        avg( cast(cs_sales_price as decimal(12,2))) agg4,
-        avg( cast(cs_net_profit as decimal(12,2))) agg5,
-        avg( cast(c_birth_year as decimal(12,2))) agg6,
-        avg( cast(cd1.cd_dep_count as decimal(12,2))) agg7
+        avg( cast(cs_quantity as {{decimaltype}})) agg1,
+        avg( cast(cs_list_price as {{decimaltype}})) agg2,
+        avg( cast(cs_coupon_amt as {{decimaltype}})) agg3,
+        avg( cast(cs_sales_price as {{decimaltype}})) agg4,
+        avg( cast(cs_net_profit as {{decimaltype}})) agg5,
+        avg( cast(c_birth_year as {{decimaltype}})) agg6,
+        avg( cast(cd1.cd_dep_count as {{decimaltype}})) agg7
  from {{tpc_schema}}.catalog_sales
      ,{{tpc_schema}}.customer_demographics cd1
      ,{{tpc_schema}}.customer_demographics cd2

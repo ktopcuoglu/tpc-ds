@@ -3,11 +3,8 @@ select
     sum(ss_net_profit) as total_sum
    ,s_state
    ,s_county
-   ,grouping(s_state)+grouping(s_county) as lochierarchy
    ,rank() over (
-  partition by grouping(s_state)+grouping(s_county),
-  case when grouping(s_county) = 0 then s_state end 
-  order by sum(ss_net_profit) desc) as rank_within_parent
+  partition by s_state,s_county order by sum(ss_net_profit) desc) as rank_within_parent
  from
     {{tpc_schema}}.store_sales
    ,{{tpc_schema}}.date_dim       d1
@@ -28,11 +25,8 @@ select
                      ) tmp1 
                where ranking <= 5
              )
- group by rollup(s_state,s_county)
- order by
-   lochierarchy desc
-  ,case when lochierarchy = 0 then s_state end
-  ,rank_within_parent
+ group by s_state,s_county
+ order by s_state,s_county,rank_within_parent
  limit 100;
 
 

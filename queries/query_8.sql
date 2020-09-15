@@ -89,7 +89,7 @@ select  s_store_name
                           '32322','14933','32936','33562','72550',
                           '27385','58049','58200','16808','21360',
                           '32961','18586','79307','15492')
-     intersect
+     intersect {{ 'distinct' if tpc_dialect == 'bigquery' }} 
       select ca_zip
       from (SELECT substr(ca_zip,1,5) ca_zip,count(*) cnt
             FROM {{tpc_schema}}.customer_address

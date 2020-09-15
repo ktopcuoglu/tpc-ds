@@ -3,9 +3,7 @@ select
     sum(ss_net_profit)/sum(ss_ext_sales_price) as gross_margin
    ,i_category
    ,i_class
-   ,grouping(i_category)+grouping(i_class) as lochierarchy
-   ,rank() over (partition by grouping(i_category)+grouping(i_class)
-                             ,case when grouping(i_class) = 0 then i_category end 
+   ,rank() over (partition by i_category,i_class
  	                   order by sum(ss_net_profit)/sum(ss_ext_sales_price) asc
                 ) as rank_within_parent
  from
@@ -20,10 +18,7 @@ select
  and s_store_sk  = ss_store_sk
  and s_state in ('TN','TN','TN','TN',
                  'TN','TN','TN','TN')
- group by rollup(i_category,i_class)
- order by lochierarchy desc
-         ,case when lochierarchy = 0 then i_category end
+ group by i_category,i_class
+ order by i_category
          ,rank_within_parent
   limit 100;
-
-
