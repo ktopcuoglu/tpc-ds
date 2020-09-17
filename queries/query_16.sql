@@ -4,10 +4,10 @@ select
   ,sum(cs_ext_ship_cost) as total_shipping_cost
   ,sum(cs_net_profit) as total_net_profit
 from
-   {{tpc_schema}}.catalog_sales cs1
-  ,{{tpc_schema}}.date_dim
-  ,{{tpc_schema}}.customer_address
-  ,{{tpc_schema}}.call_center
+   {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales cs1
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.call_center
 where
     d_date between '1999-02-01' and  cast('1999-04-02' as date)
 and cs1.cs_ship_date_sk = d_date_sk
@@ -18,11 +18,11 @@ and cc_county in ('Williamson County','Williamson County','Williamson County','W
                   'Williamson County'
 )
 and exists (select *
-            from {{tpc_schema}}.catalog_sales cs2
+            from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales cs2
             where cs1.cs_order_number = cs2.cs_order_number
               and cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk)
 and not exists(select *
-               from {{tpc_schema}}.catalog_returns cr1
+               from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns cr1
                where cs1.cs_order_number = cr1.cr_order_number)
 order by count(distinct cs_order_number)
 limit 100;

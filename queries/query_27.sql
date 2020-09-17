@@ -5,11 +5,11 @@ select  i_item_id,
         avg(ss_list_price) agg2,
         avg(ss_coupon_amt) agg3,
         avg(ss_sales_price) agg4
- from {{tpc_schema}}.store_sales
-    , {{tpc_schema}}.customer_demographics
-    , {{tpc_schema}}.date_dim
-    , {{tpc_schema}}.store
-    , {{tpc_schema}}.item
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.store
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.item
  where ss_sold_date_sk = d_date_sk and
        ss_item_sk = i_item_sk and
        ss_store_sk = s_store_sk and

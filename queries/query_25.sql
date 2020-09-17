@@ -6,14 +6,14 @@ select  i_item_id
         ,sum(ss_net_profit) as store_sales_profit
         ,sum(sr_net_loss) as store_returns_loss
         ,sum(cs_net_profit) as catalog_sales_profit
- from  {{tpc_schema}}.store_sales
-      ,{{tpc_schema}}.store_returns
-      ,{{tpc_schema}}.catalog_sales
-      ,{{tpc_schema}}.date_dim d1
-      ,{{tpc_schema}}.date_dim d2
-      ,{{tpc_schema}}.date_dim d3
-      ,{{tpc_schema}}.store
-      ,{{tpc_schema}}.item
+ from  {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d1
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d2
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d3
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
  where  d1.d_moy = 4
         and d1.d_year = 2000
         and d1.d_date_sk = ss_sold_date_sk

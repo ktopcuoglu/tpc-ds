@@ -15,13 +15,13 @@ select  i_item_id,
         avg( cast(cs_net_profit as {{decimaltype}})) agg5,
         avg( cast(c_birth_year as {{decimaltype}})) agg6,
         avg( cast(cd1.cd_dep_count as {{decimaltype}})) agg7
- from {{tpc_schema}}.catalog_sales
-     ,{{tpc_schema}}.customer_demographics cd1
-     ,{{tpc_schema}}.customer_demographics cd2
-     ,{{tpc_schema}}.customer
-     ,{{tpc_schema}}.customer_address
-     ,{{tpc_schema}}.date_dim
-     ,{{tpc_schema}}.item
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics cd1
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics cd2
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
  where cs_sold_date_sk = d_date_sk and
        cs_item_sk = i_item_sk and
        cs_bill_cdemo_sk = cd1.cd_demo_sk and

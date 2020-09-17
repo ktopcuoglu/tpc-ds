@@ -1,7 +1,7 @@
 select  *
 from
  (select count(*) h8_30_to_9
- from {{tpc_schema}}.store_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_time_sk = time_dim.t_time_sk   
      and ss_hdemo_sk = household_demographics.hd_demo_sk 
      and ss_store_sk = s_store_sk
@@ -12,7 +12,7 @@ from
           (household_demographics.hd_dep_count = 1 and household_demographics.hd_vehicle_count<=1+2)) 
      and store.s_store_name = 'ese') s1,
  (select count(*) h9_to_9_30 
- from {{tpc_schema}}.store_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_time_sk = time_dim.t_time_sk
      and ss_hdemo_sk = household_demographics.hd_demo_sk
      and ss_store_sk = s_store_sk 
@@ -23,7 +23,7 @@ from
           (household_demographics.hd_dep_count = 1 and household_demographics.hd_vehicle_count<=1+2))
      and store.s_store_name = 'ese') s2,
  (select count(*) h9_30_to_10 
- from {{tpc_schema}}.store_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_time_sk = time_dim.t_time_sk
      and ss_hdemo_sk = household_demographics.hd_demo_sk
      and ss_store_sk = s_store_sk
@@ -34,7 +34,7 @@ from
           (household_demographics.hd_dep_count = 1 and household_demographics.hd_vehicle_count<=1+2))
      and store.s_store_name = 'ese') s3,
  (select count(*) h10_to_10_30
- from {{tpc_schema}}.store_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_time_sk = time_dim.t_time_sk
      and ss_hdemo_sk = household_demographics.hd_demo_sk
      and ss_store_sk = s_store_sk
@@ -45,7 +45,7 @@ from
           (household_demographics.hd_dep_count = 1 and household_demographics.hd_vehicle_count<=1+2))
      and store.s_store_name = 'ese') s4,
  (select count(*) h10_30_to_11
- from {{tpc_schema}}.store_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_time_sk = time_dim.t_time_sk
      and ss_hdemo_sk = household_demographics.hd_demo_sk
      and ss_store_sk = s_store_sk
@@ -56,7 +56,7 @@ from
           (household_demographics.hd_dep_count = 1 and household_demographics.hd_vehicle_count<=1+2))
      and store.s_store_name = 'ese') s5,
  (select count(*) h11_to_11_30
- from {{tpc_schema}}.store_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_time_sk = time_dim.t_time_sk
      and ss_hdemo_sk = household_demographics.hd_demo_sk
      and ss_store_sk = s_store_sk 
@@ -67,7 +67,7 @@ from
           (household_demographics.hd_dep_count = 1 and household_demographics.hd_vehicle_count<=1+2))
      and store.s_store_name = 'ese') s6,
  (select count(*) h11_30_to_12
- from {{tpc_schema}}.store_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_time_sk = time_dim.t_time_sk
      and ss_hdemo_sk = household_demographics.hd_demo_sk
      and ss_store_sk = s_store_sk
@@ -78,7 +78,7 @@ from
           (household_demographics.hd_dep_count = 1 and household_demographics.hd_vehicle_count<=1+2))
      and store.s_store_name = 'ese') s7,
  (select count(*) h12_to_12_30
- from {{tpc_schema}}.store_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_time_sk = time_dim.t_time_sk
      and ss_hdemo_sk = household_demographics.hd_demo_sk
      and ss_store_sk = s_store_sk

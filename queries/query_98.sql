@@ -7,9 +7,9 @@ select i_item_id
       ,sum(ss_ext_sales_price) as itemrevenue 
       ,sum(ss_ext_sales_price)*100/sum(sum(ss_ext_sales_price)) over
           (partition by i_class) as revenueratio
-from  {{tpc_schema}}.store_sales
-     ,{{tpc_schema}}.item 
-     ,{{tpc_schema}}.date_dim
+from  {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.item 
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
 where 
      ss_item_sk = i_item_sk 
        and i_category in ('Jewelry', 'Sports', 'Books')

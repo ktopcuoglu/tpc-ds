@@ -1,8 +1,8 @@
 
 select  count(*) 
-from {{tpc_schema}}.store_sales
-    ,{{tpc_schema}}.household_demographics 
-    ,{{tpc_schema}}.time_dim, {{tpc_schema}}.store
+from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics 
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.store
 where ss_sold_time_sk = time_dim.t_time_sk   
     and ss_hdemo_sk = household_demographics.hd_demo_sk 
     and ss_store_sk = s_store_sk

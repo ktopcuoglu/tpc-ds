@@ -19,11 +19,11 @@ select
                  (sr_returned_date_sk - ss_sold_date_sk <= 120) then 1 else 0 end)  as days_91_120 
   ,sum(case when (sr_returned_date_sk - ss_sold_date_sk  > 120) then 1 else 0 end)  as days_gt120 
 from
-   {{tpc_schema}}.store_sales
-  ,{{tpc_schema}}.store_returns
-  ,{{tpc_schema}}.store
-  ,{{tpc_schema}}.date_dim d1
-  ,{{tpc_schema}}.date_dim d2
+   {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d1
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d2
 where
     d2.d_year = 2000
 and d2.d_moy  = 9

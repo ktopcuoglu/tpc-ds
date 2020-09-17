@@ -2,42 +2,42 @@
 with ss_items as
  (select i_item_id item_id
         ,sum(ss_ext_sales_price) ss_item_rev 
- from {{tpc_schema}}.store_sales
-     ,{{tpc_schema}}.item
-     ,{{tpc_schema}}.date_dim
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where ss_item_sk = i_item_sk
    and d_date in (select d_date
-                  from {{tpc_schema}}.date_dim
+                  from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
                   where d_week_seq = (select d_week_seq 
-                                      from {{tpc_schema}}.date_dim
+                                      from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
                                       where d_date = '1998-02-19'))
    and ss_sold_date_sk   = d_date_sk
  group by i_item_id),
  cs_items as
  (select i_item_id item_id
         ,sum(cs_ext_sales_price) cs_item_rev
-  from {{tpc_schema}}.catalog_sales
-      ,{{tpc_schema}}.item
-      ,{{tpc_schema}}.date_dim
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where cs_item_sk = i_item_sk
   and  d_date in (select d_date
-                  from {{tpc_schema}}.date_dim
+                  from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
                   where d_week_seq = (select d_week_seq 
-                                      from {{tpc_schema}}.date_dim
+                                      from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
                                       where d_date = '1998-02-19'))
   and  cs_sold_date_sk = d_date_sk
  group by i_item_id),
  ws_items as
  (select i_item_id item_id
         ,sum(ws_ext_sales_price) ws_item_rev
-  from {{tpc_schema}}.web_sales
-      ,{{tpc_schema}}.item
-      ,{{tpc_schema}}.date_dim
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where ws_item_sk = i_item_sk
   and  d_date in (select d_date
-                  from {{tpc_schema}}.date_dim
+                  from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
                   where d_week_seq =(select d_week_seq 
-                                     from {{tpc_schema}}.date_dim
+                                     from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
                                      where d_date = '1998-02-19'))
   and ws_sold_date_sk   = d_date_sk
  group by i_item_id)

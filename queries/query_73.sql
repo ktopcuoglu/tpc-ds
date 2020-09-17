@@ -8,10 +8,10 @@ select c_last_name
    (select ss_ticket_number
           ,ss_customer_sk
           ,count(*) cnt
-    from {{tpc_schema}}.store_sales
-        ,{{tpc_schema}}.date_dim
-        ,{{tpc_schema}}.store
-        ,{{tpc_schema}}.household_demographics
+    from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics
     where store_sales.ss_sold_date_sk = date_dim.d_date_sk
     and store_sales.ss_store_sk = store.s_store_sk  
     and store_sales.ss_hdemo_sk = household_demographics.hd_demo_sk
@@ -24,7 +24,7 @@ select c_last_name
     and date_dim.d_year in (1998,1998+1,1998+2)
     and store.s_county in ('Williamson County','Williamson County','Williamson County','Williamson County')
     group by ss_ticket_number,ss_customer_sk) dj
-     ,{{tpc_schema}}.customer
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
     where ss_customer_sk = c_customer_sk
       and cnt between 1 and 5
     order by cnt desc, c_last_name asc;

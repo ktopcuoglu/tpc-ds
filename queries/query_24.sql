@@ -11,12 +11,12 @@ with ssales as
       ,i_units
       ,i_size
       ,sum(ss_sales_price) netpaid
-from {{tpc_schema}}.store_sales
-    ,{{tpc_schema}}.store_returns
-    ,{{tpc_schema}}.store
-    ,{{tpc_schema}}.item
-    ,{{tpc_schema}}.customer
-    ,{{tpc_schema}}.customer_address
+from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
 where ss_ticket_number = sr_ticket_number
   and ss_item_sk = sr_item_sk
   and ss_customer_sk = c_customer_sk
@@ -63,12 +63,12 @@ with ssales as
       ,i_units
       ,i_size
       ,sum(ss_sales_price) netpaid
-from {{tpc_schema}}.store_sales
-    ,{{tpc_schema}}.store_returns
-    ,{{tpc_schema}}.store
-    ,{{tpc_schema}}.item
-    ,{{tpc_schema}}.customer
-    ,{{tpc_schema}}.customer_address
+from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+    ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
 where ss_ticket_number = sr_ticket_number
   and ss_item_sk = sr_item_sk
   and ss_customer_sk = c_customer_sk

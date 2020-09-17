@@ -1,12 +1,12 @@
 
 with ss as (
         select i_item_id,sum(ss_ext_sales_price) total_sales
-        from    {{tpc_schema}}.store_sales,
-                {{tpc_schema}}.date_dim,
-                {{tpc_schema}}.customer_address,
-                {{tpc_schema}}.item
+        from    {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales,
+                {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+                {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address,
+                {{tpc_schema_prefix}}_{{tpc_scale}}.item
         where i_item_id in (select i_item_id
-                        from {{tpc_schema}}.item
+                        from {{tpc_schema_prefix}}_{{tpc_scale}}.item
                         where i_color in ('orchid','chiffon','lace'))
         and     ss_item_sk              = i_item_sk
         and     ss_sold_date_sk         = d_date_sk
@@ -17,12 +17,12 @@ with ss as (
         group by i_item_id
  ),cs as (
  select i_item_id,sum(cs_ext_sales_price) total_sales
- from    {{tpc_schema}}.catalog_sales,
-         {{tpc_schema}}.date_dim,
-         {{tpc_schema}}.customer_address,
-         {{tpc_schema}}.item
+ from    {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales,
+         {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+         {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address,
+         {{tpc_schema_prefix}}_{{tpc_scale}}.item
 where i_item_id               in (select i_item_id
-                                    from {{tpc_schema}}.item
+                                    from {{tpc_schema_prefix}}_{{tpc_scale}}.item
                                    where i_color in ('orchid','chiffon','lace'))
  and     cs_item_sk              = i_item_sk
  and     cs_sold_date_sk         = d_date_sk
@@ -34,14 +34,14 @@ where i_item_id               in (select i_item_id
  ws as (
  select i_item_id,sum(ws_ext_sales_price) total_sales
  from
-         {{tpc_schema}}.web_sales,
-         {{tpc_schema}}.date_dim,
-         {{tpc_schema}}.customer_address,
-         {{tpc_schema}}.item
+         {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales,
+         {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+         {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address,
+         {{tpc_schema_prefix}}_{{tpc_scale}}.item
  where
          i_item_id               in (select
   i_item_id
-from {{tpc_schema}}.item
+from {{tpc_schema_prefix}}_{{tpc_scale}}.item
 where i_color in ('orchid','chiffon','lace'))
  and     ws_item_sk              = i_item_sk
  and     ws_sold_date_sk         = d_date_sk

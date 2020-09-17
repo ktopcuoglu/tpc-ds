@@ -4,12 +4,12 @@ with ssr as
           sum(ss_ext_sales_price) as sales,
           sum(coalesce(sr_return_amt, 0)) as returns,
           sum(ss_net_profit - coalesce(sr_net_loss, 0)) as profit
-  from {{tpc_schema}}.store_sales left outer join {{tpc_schema}}.store_returns on
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales left outer join {{tpc_schema_prefix}}_{{tpc_scale}}.store_returns on
          (ss_item_sk = sr_item_sk and ss_ticket_number = sr_ticket_number),
-     {{tpc_schema}}.date_dim,
-     {{tpc_schema}}.store,
-     {{tpc_schema}}.item,
-     {{tpc_schema}}.promotion
+     {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.store,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.item,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.promotion
  where ss_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
                   and '1998-09-03'
@@ -25,12 +25,12 @@ with ssr as
           sum(cs_ext_sales_price) as sales,
           sum(coalesce(cr_return_amount, 0)) as returns,
           sum(cs_net_profit - coalesce(cr_net_loss, 0)) as profit
-  from {{tpc_schema}}.catalog_sales left outer join {{tpc_schema}}.catalog_returns on
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales left outer join {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns on
          (cs_item_sk = cr_item_sk and cs_order_number = cr_order_number),
-     {{tpc_schema}}.date_dim,
-     {{tpc_schema}}.catalog_page,
-     {{tpc_schema}}.item,
-     {{tpc_schema}}.promotion
+     {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_page,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.item,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.promotion
  where cs_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and '1998-09-03'
@@ -46,12 +46,12 @@ group by cp_catalog_page_id)
           sum(ws_ext_sales_price) as sales,
           sum(coalesce(wr_return_amt, 0)) as returns,
           sum(ws_net_profit - coalesce(wr_net_loss, 0)) as profit
-  from {{tpc_schema}}.web_sales left outer join {{tpc_schema}}.web_returns on
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales left outer join {{tpc_schema_prefix}}_{{tpc_scale}}.web_returns on
          (ws_item_sk = wr_item_sk and ws_order_number = wr_order_number),
-     {{tpc_schema}}.date_dim,
-     {{tpc_schema}}.web_site,
-     {{tpc_schema}}.item,
-     {{tpc_schema}}.promotion
+     {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.web_site,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.item,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.promotion
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and '1998-09-03'

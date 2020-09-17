@@ -103,11 +103,11 @@ select
      ,sum(case when d_moy = 12
          then ws_net_paid_inc_tax * ws_quantity else 0 end) as dec_net
      from
-          {{tpc_schema}}.web_sales
-         ,{{tpc_schema}}.warehouse
-         ,{{tpc_schema}}.date_dim
-         ,{{tpc_schema}}.time_dim
-       ,{{tpc_schema}}.ship_mode
+          {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales
+         ,{{tpc_schema_prefix}}_{{tpc_scale}}.warehouse
+         ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+         ,{{tpc_schema_prefix}}_{{tpc_scale}}.time_dim
+       ,{{tpc_schema_prefix}}_{{tpc_scale}}.ship_mode
      where
             ws_warehouse_sk =  w_warehouse_sk
         and ws_sold_date_sk = d_date_sk
@@ -183,11 +183,11 @@ select
      ,sum(case when d_moy = 12
          then cs_net_paid_inc_ship_tax * cs_quantity else 0 end) as dec_net
      from
-          {{tpc_schema}}.catalog_sales
-         ,{{tpc_schema}}.warehouse
-         ,{{tpc_schema}}.date_dim
-         ,{{tpc_schema}}.time_dim
-      ,{{tpc_schema}}.ship_mode
+          {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+         ,{{tpc_schema_prefix}}_{{tpc_scale}}.warehouse
+         ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+         ,{{tpc_schema_prefix}}_{{tpc_scale}}.time_dim
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.ship_mode
      where
             cs_warehouse_sk =  w_warehouse_sk
         and cs_sold_date_sk = d_date_sk

@@ -1,12 +1,12 @@
 
 select  c_customer_id as customer_id
        , coalesce(c_last_name,'') || ', ' || coalesce(c_first_name,'') as customername
- from {{tpc_schema}}.customer
-     ,{{tpc_schema}}.customer_address
-     ,{{tpc_schema}}.customer_demographics
-     ,{{tpc_schema}}.household_demographics
-     ,{{tpc_schema}}.income_band
-     ,{{tpc_schema}}.store_returns
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.customer
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.income_band
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
  where ca_city	        =  'Hopewell'
    and c_current_addr_sk = ca_address_sk
    and ib_lower_bound   >=  32287

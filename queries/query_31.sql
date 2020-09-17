@@ -1,17 +1,17 @@
 
 with ss as
  (select ca_county,d_qoy, d_year,sum(ss_ext_sales_price) as store_sales
- from {{tpc_schema}}.store_sales
-     ,{{tpc_schema}}.date_dim
-     ,{{tpc_schema}}.customer_address
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
  where ss_sold_date_sk = d_date_sk
   and ss_addr_sk=ca_address_sk
  group by ca_county,d_qoy, d_year),
  ws as
  (select ca_county,d_qoy, d_year,sum(ws_ext_sales_price) as web_sales
- from {{tpc_schema}}.web_sales
-     ,{{tpc_schema}}.date_dim
-     ,{{tpc_schema}}.customer_address
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
  where ws_sold_date_sk = d_date_sk
   and ws_bill_addr_sk=ca_address_sk
  group by ca_county,d_qoy, d_year)

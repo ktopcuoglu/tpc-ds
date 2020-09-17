@@ -12,11 +12,11 @@ select
                  (cs_ship_date_sk - cs_sold_date_sk <= 120) then 1 else 0 end)  as days_91_120
   ,sum(case when (cs_ship_date_sk - cs_sold_date_sk  > 120) then 1 else 0 end)  as days_gt120
 from
-   {{tpc_schema}}.catalog_sales
-  ,{{tpc_schema}}.warehouse
-  ,{{tpc_schema}}.ship_mode
-  ,{{tpc_schema}}.call_center
-  ,{{tpc_schema}}.date_dim
+   {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.warehouse
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.ship_mode
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.call_center
+  ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
 where
     d_month_seq between 1212 and 1212 + 11
 and cs_ship_date_sk   = d_date_sk

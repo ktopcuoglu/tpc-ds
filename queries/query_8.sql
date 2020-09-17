@@ -1,13 +1,13 @@
 
 select  s_store_name
       ,sum(ss_net_profit)
- from {{tpc_schema}}.store_sales
-     ,{{tpc_schema}}.date_dim
-     ,{{tpc_schema}}.store,
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.store,
      (select ca_zip
      from (
       select substr(ca_zip,1,5) ca_zip
-      from {{tpc_schema}}.customer_address
+      from {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
       where substr(ca_zip,1,5) IN (
                           '89436','30868','65085','22977','83927','77557',
                           '58429','40697','80614','10502','32779',
@@ -92,8 +92,8 @@ select  s_store_name
      intersect {{ 'distinct' if tpc_dialect == 'bigquery' }} 
       select ca_zip
       from (SELECT substr(ca_zip,1,5) ca_zip,count(*) cnt
-            FROM {{tpc_schema}}.customer_address
-               , {{tpc_schema}}.customer
+            FROM {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+               , {{tpc_schema_prefix}}_{{tpc_scale}}.customer
             WHERE ca_address_sk = c_current_addr_sk and
                   c_preferred_cust_flag='Y'
             group by ca_zip

@@ -9,25 +9,25 @@ select
   cd_credit_rating, 
   count(*) cnt3 
  from 
-  {{tpc_schema}}.customer c,{{tpc_schema}}.customer_address ca,{{tpc_schema}}.customer_demographics 
+  {{tpc_schema_prefix}}_{{tpc_scale}}.customer c,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address ca,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics 
  where 
   c.c_current_addr_sk = ca.ca_address_sk and 
   ca_state in ('CO','IL','MN') and 
   cd_demo_sk = c.c_current_cdemo_sk and  
   exists (select * 
-          from {{tpc_schema}}.store_sales,{{tpc_schema}}.date_dim 
+          from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
           where c.c_customer_sk = ss_customer_sk and 
                 ss_sold_date_sk = d_date_sk and 
                 d_year = 1999 and 
                 d_moy between 1 and 1+2) and 
    (not exists (select * 
-            from {{tpc_schema}}.web_sales,{{tpc_schema}}.date_dim 
+            from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
             where c.c_customer_sk = ws_bill_customer_sk and 
                   ws_sold_date_sk = d_date_sk and 
                   d_year = 1999 and 
                   d_moy between 1 and 1+2) and 
     not exists (select *  
-            from {{tpc_schema}}.catalog_sales,{{tpc_schema}}.date_dim 
+            from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
             where c.c_customer_sk = cs_ship_customer_sk and 
                   cs_sold_date_sk = d_date_sk and 
                   d_year = 1999 and 

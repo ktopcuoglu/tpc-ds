@@ -3,10 +3,10 @@ select  *
 from  (select i_manufact_id,
               sum(ss_sales_price) sum_sales,
               avg(sum(ss_sales_price)) over (partition by i_manufact_id) avg_quarterly_sales
-         from {{tpc_schema}}.item
-            , {{tpc_schema}}.store_sales
-            , {{tpc_schema}}.date_dim
-            , {{tpc_schema}}.store
+         from {{tpc_schema_prefix}}_{{tpc_scale}}.item
+            , {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+            , {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+            , {{tpc_schema_prefix}}_{{tpc_scale}}.store
          where ss_item_sk = i_item_sk and
                ss_sold_date_sk = d_date_sk and
                ss_store_sk = s_store_sk and

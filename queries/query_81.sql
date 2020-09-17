@@ -4,9 +4,9 @@ with customer_total_return as (
     ca_state as ctr_state,
     sum(cr_return_amt_inc_tax) as ctr_total_return
   from
-    {{tpc_schema}}.catalog_returns,
-    {{tpc_schema}}.date_dim,
-    {{tpc_schema}}.customer_address
+    {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns,
+    {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+    {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
   where
     cr_returned_date_sk = d_date_sk
     and d_year = 1998
@@ -34,8 +34,8 @@ select
   ctr_total_return
 from
   customer_total_return ctr1,
-  {{tpc_schema}}.customer_address,
-  {{tpc_schema}}.customer
+  {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address,
+  {{tpc_schema_prefix}}_{{tpc_scale}}.customer
 where
   ctr1.ctr_total_return > ( select avg(ctr_total_return) * 1.2
                             from customer_total_return ctr2

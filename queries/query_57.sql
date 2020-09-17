@@ -12,10 +12,10 @@ with v1 as(
           (partition by i_category, i_brand,
                      cc_name
            order by d_year, d_moy) rn
- from {{tpc_schema}}.item
-    , {{tpc_schema}}.catalog_sales
-    , {{tpc_schema}}.date_dim
-    , {{tpc_schema}}.call_center
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.item
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.call_center
  where cs_item_sk = i_item_sk and
        cs_sold_date_sk = d_date_sk and
        cc_call_center_sk= cs_call_center_sk and

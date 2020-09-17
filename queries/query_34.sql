@@ -9,10 +9,10 @@ select c_last_name
       (select ss_ticket_number
               ,ss_customer_sk
               ,count(*) cnt
-        from {{tpc_schema}}.store_sales
-            ,{{tpc_schema}}.date_dim
-            ,{{tpc_schema}}.store
-            ,{{tpc_schema}}.household_demographics
+        from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics
         where store_sales.ss_sold_date_sk = date_dim.d_date_sk
         and store_sales.ss_store_sk = store.s_store_sk  
         and store_sales.ss_hdemo_sk = household_demographics.hd_demo_sk
@@ -29,7 +29,7 @@ select c_last_name
                               'Williamson County','Williamson County','Williamson County','Williamson County')
         group by ss_ticket_number,ss_customer_sk
         ) dn
-      ,{{tpc_schema}}.customer
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
     where ss_customer_sk = c_customer_sk 
       and cnt between 15 and 20
     order by c_last_name,c_first_name,c_salutation,c_preferred_cust_flag desc, ss_ticket_number;

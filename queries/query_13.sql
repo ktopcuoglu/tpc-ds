@@ -3,12 +3,12 @@ select avg(ss_quantity)
        ,avg(ss_ext_sales_price)
        ,avg(ss_ext_wholesale_cost)
        ,sum(ss_ext_wholesale_cost)
- from {{tpc_schema}}.store_sales
-     ,{{tpc_schema}}.store
-     ,{{tpc_schema}}.customer_demographics
-     ,{{tpc_schema}}.household_demographics
-     ,{{tpc_schema}}.customer_address
-     ,{{tpc_schema}}.date_dim
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where s_store_sk = ss_store_sk
  and  ss_sold_date_sk = d_date_sk and d_year = 2001
  and((ss_hdemo_sk=hd_demo_sk

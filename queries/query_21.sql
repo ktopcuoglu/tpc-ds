@@ -8,10 +8,10 @@ select  *
             ,sum(case when (cast(d_date as date) >= cast ('1998-04-08' as date))
                       then inv_quantity_on_hand 
                       else 0 end) as inv_after
-   from {{tpc_schema}}.inventory
-       ,{{tpc_schema}}.warehouse
-       ,{{tpc_schema}}.item
-       ,{{tpc_schema}}.date_dim
+   from {{tpc_schema_prefix}}_{{tpc_scale}}.inventory
+       ,{{tpc_schema_prefix}}_{{tpc_scale}}.warehouse
+       ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
+       ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
    where i_current_price between 0.99 and 1.49
      and i_item_sk          = inv_item_sk
      and inv_warehouse_sk   = w_warehouse_sk

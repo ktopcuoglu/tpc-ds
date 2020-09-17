@@ -1,9 +1,9 @@
 
 with frequent_ss_items as 
  (select substr(i_item_desc,1,30) itemdesc,i_item_sk item_sk,d_date solddate,count(*) cnt
-  from {{tpc_schema}}.store_sales
-      ,{{tpc_schema}}.date_dim 
-      ,{{tpc_schema}}.item
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
   where ss_sold_date_sk = d_date_sk
     and ss_item_sk = i_item_sk 
     and d_year in (1999,1999+1,1999+2,1999+3)
@@ -12,17 +12,17 @@ with frequent_ss_items as
  max_store_sales as
  (select max(csales) tpcds_cmax 
   from (select c_customer_sk,sum(ss_quantity*ss_sales_price) csales
-        from {{tpc_schema}}.store_sales
-            ,{{tpc_schema}}.customer
-            ,{{tpc_schema}}.date_dim 
+        from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
         where ss_customer_sk = c_customer_sk
          and ss_sold_date_sk = d_date_sk
          and d_year in (1999,1999+1,1999+2,1999+3) 
         group by c_customer_sk) q1),
  best_ss_customer as
  (select c_customer_sk,sum(ss_quantity*ss_sales_price) ssales
-  from {{tpc_schema}}.store_sales
-      ,{{tpc_schema}}.customer
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
   where ss_customer_sk = c_customer_sk
   group by c_customer_sk
   having sum(ss_quantity*ss_sales_price) > (95/100.0) * (select *
@@ -30,8 +30,8 @@ with frequent_ss_items as
 )
   select  sum(sales)
  from (select cs_quantity*cs_list_price sales
-       from {{tpc_schema}}.catalog_sales
-           ,{{tpc_schema}}.date_dim 
+       from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+           ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
        where d_year = 1999 
          and d_moy = 1 
          and cs_sold_date_sk = d_date_sk 
@@ -39,8 +39,8 @@ with frequent_ss_items as
          and cs_bill_customer_sk in (select c_customer_sk from best_ss_customer)
       union all
       select ws_quantity*ws_list_price sales
-       from {{tpc_schema}}.web_sales 
-           ,{{tpc_schema}}.date_dim 
+       from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales 
+           ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
        where d_year = 1999 
          and d_moy = 1 
          and ws_sold_date_sk = d_date_sk 
@@ -49,9 +49,9 @@ with frequent_ss_items as
  limit 100;
 with frequent_ss_items as
  (select substr(i_item_desc,1,30) itemdesc,i_item_sk item_sk,d_date solddate,count(*) cnt
-  from {{tpc_schema}}.store_sales
-      ,{{tpc_schema}}.date_dim
-      ,{{tpc_schema}}.item
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
   where ss_sold_date_sk = d_date_sk
     and ss_item_sk = i_item_sk
     and d_year in (1999,1999 + 1,1999 + 2,1999 + 3)
@@ -60,26 +60,26 @@ with frequent_ss_items as
  max_store_sales as
  (select max(csales) tpcds_cmax
   from (select c_customer_sk,sum(ss_quantity*ss_sales_price) csales
-        from {{tpc_schema}}.store_sales
-            ,{{tpc_schema}}.customer
-            ,{{tpc_schema}}.date_dim 
+        from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
         where ss_customer_sk = c_customer_sk
          and ss_sold_date_sk = d_date_sk
          and d_year in (1999,1999+1,1999+2,1999+3)
         group by c_customer_sk)q3),
  best_ss_customer as
  (select c_customer_sk,sum(ss_quantity*ss_sales_price) ssales
-  from {{tpc_schema}}.store_sales
-      ,{{tpc_schema}}.customer
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
   where ss_customer_sk = c_customer_sk
   group by c_customer_sk
   having sum(ss_quantity*ss_sales_price) > (95/100.0) * (select *
                                                            from max_store_sales))
 select  c_last_name,c_first_name,sales
  from (select c_last_name,c_first_name,sum(cs_quantity*cs_list_price) sales
-        from {{tpc_schema}}.catalog_sales
-            ,{{tpc_schema}}.customer
-            ,{{tpc_schema}}.date_dim 
+        from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+            ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
         where d_year = 1999 
          and d_moy = 1 
          and cs_sold_date_sk = d_date_sk 
@@ -89,9 +89,9 @@ select  c_last_name,c_first_name,sales
        group by c_last_name,c_first_name
       union all
       select c_last_name,c_first_name,sum(ws_quantity*ws_list_price) sales
-       from {{tpc_schema}}.web_sales
-           ,{{tpc_schema}}.customer
-           ,{{tpc_schema}}.date_dim 
+       from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales
+           ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+           ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim 
        where d_year = 1999 
          and d_moy = 1 
          and ws_sold_date_sk = d_date_sk 

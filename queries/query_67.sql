@@ -19,10 +19,10 @@ from (select i_category
                   ,d_moy
                   ,s_store_id
                   ,sum(coalesce(ss_sales_price*ss_quantity,0)) sumsales
-            from {{tpc_schema}}.store_sales
-                ,{{tpc_schema}}.date_dim
-                ,{{tpc_schema}}.store
-                ,{{tpc_schema}}.item
+            from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+                ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+                ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+                ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
        where  ss_sold_date_sk=d_date_sk
           and ss_item_sk=i_item_sk
           and ss_store_sk = s_store_sk

@@ -17,7 +17,7 @@ with ssr as
             ss_net_profit as profit,
             cast(0 as {{decimaltype}}) as return_amt,
             cast(0 as {{decimaltype}}) as net_loss
-    from {{tpc_schema}}.store_sales
+    from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
     union all
     select sr_store_sk as store_sk,
            sr_returned_date_sk as date_sk,
@@ -25,10 +25,10 @@ with ssr as
            cast(0 as {{decimaltype}}) as profit,
            sr_return_amt as return_amt,
            sr_net_loss as net_loss
-    from {{tpc_schema}}.store_returns
+    from {{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
    ) salesreturns,
-     {{tpc_schema}}.date_dim,
-     {{tpc_schema}}.store
+     {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
                   and cast('1998-08-18' as date)
@@ -47,7 +47,7 @@ with ssr as
             cs_net_profit as profit,
             cast(0 as {{decimaltype}}) as return_amt,
             cast(0 as {{decimaltype}}) as net_loss
-    from {{tpc_schema}}.catalog_sales
+    from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
     union all
     select cr_catalog_page_sk as page_sk,
            cr_returned_date_sk as date_sk,
@@ -55,10 +55,10 @@ with ssr as
            cast(0 as {{decimaltype}}) as profit,
            cr_return_amount as return_amt,
            cr_net_loss as net_loss
-    from {{tpc_schema}}.catalog_returns
+    from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns
    ) salesreturns,
-     {{tpc_schema}}.date_dim,
-     {{tpc_schema}}.catalog_page
+     {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_page
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and cast('1998-08-18' as date)
@@ -77,7 +77,7 @@ with ssr as
             ws_net_profit as profit,
             cast(0 as {{decimaltype}}) as return_amt,
             cast(0 as {{decimaltype}}) as net_loss
-    from {{tpc_schema}}.web_sales
+    from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales
     union all
     select ws_web_site_sk as wsr_web_site_sk,
            wr_returned_date_sk as date_sk,
@@ -85,12 +85,12 @@ with ssr as
            cast(0 as {{decimaltype}}) as profit,
            wr_return_amt as return_amt,
            wr_net_loss as net_loss
-    from {{tpc_schema}}.web_returns left outer join {{tpc_schema}}.web_sales on
+    from {{tpc_schema_prefix}}_{{tpc_scale}}.web_returns left outer join {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales on
          ( wr_item_sk = ws_item_sk
            and wr_order_number = ws_order_number)
    ) salesreturns,
-     {{tpc_schema}}.date_dim,
-     {{tpc_schema}}.web_site
+     {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+     {{tpc_schema_prefix}}_{{tpc_scale}}.web_site
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and cast('1998-08-18' as date)

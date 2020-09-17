@@ -5,7 +5,7 @@
 {% endif %}
 select  cast(amc as {{decimaltype}})/cast(pmc as {{decimaltype}}) am_pm_ratio
  from ( select count(*) amc
-       from {{tpc_schema}}.web_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.web_page
+       from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.web_page
        where ws_sold_time_sk = time_dim.t_time_sk
          and ws_ship_hdemo_sk = household_demographics.hd_demo_sk
          and ws_web_page_sk = web_page.wp_web_page_sk
@@ -13,7 +13,7 @@ select  cast(amc as {{decimaltype}})/cast(pmc as {{decimaltype}}) am_pm_ratio
          and household_demographics.hd_dep_count = 8
          and web_page.wp_char_count between 5000 and 5200) at2,
       ( select count(*) pmc
-       from {{tpc_schema}}.web_sales, {{tpc_schema}}.household_demographics , {{tpc_schema}}.time_dim, {{tpc_schema}}.web_page
+       from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales, {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics , {{tpc_schema_prefix}}_{{tpc_scale}}.time_dim, {{tpc_schema_prefix}}_{{tpc_scale}}.web_page
        where ws_sold_time_sk = time_dim.t_time_sk
          and ws_ship_hdemo_sk = household_demographics.hd_demo_sk
          and ws_web_page_sk = web_page.wp_web_page_sk

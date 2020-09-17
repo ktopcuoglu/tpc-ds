@@ -3,9 +3,9 @@ with ss as
  (select s_store_sk,
          sum(ss_ext_sales_price) as sales,
          sum(ss_net_profit) as profit
- from {{tpc_schema}}.store_sales,
-      {{tpc_schema}}.date_dim,
-      {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where ss_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
                   and '1998-09-03'
@@ -16,9 +16,9 @@ with ss as
  (select s_store_sk,
          sum(sr_return_amt) as returns,
          sum(sr_net_loss) as profit_loss
- from {{tpc_schema}}.store_returns,
-      {{tpc_schema}}.date_dim,
-      {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_returns,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where sr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and '1998-09-03'
@@ -28,8 +28,8 @@ with ss as
  (select cs_call_center_sk,
         sum(cs_ext_sales_price) as sales,
         sum(cs_net_profit) as profit
- from {{tpc_schema}}.catalog_sales,
-      {{tpc_schema}}.date_dim
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where cs_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and '1998-09-03'
@@ -39,8 +39,8 @@ with ss as
  (select cr_call_center_sk,
          sum(cr_return_amount) as returns,
          sum(cr_net_loss) as profit_loss
- from {{tpc_schema}}.catalog_returns,
-      {{tpc_schema}}.date_dim
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where cr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and '1998-09-03'
@@ -50,9 +50,9 @@ with ss as
  ( select wp_web_page_sk,
         sum(ws_ext_sales_price) as sales,
         sum(ws_net_profit) as profit
- from {{tpc_schema}}.web_sales,
-      {{tpc_schema}}.date_dim,
-      {{tpc_schema}}.web_page
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.web_page
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and '1998-09-03'
@@ -62,9 +62,9 @@ with ss as
  (select wp_web_page_sk,
         sum(wr_return_amt) as returns,
         sum(wr_net_loss) as profit_loss
- from {{tpc_schema}}.web_returns,
-      {{tpc_schema}}.date_dim,
-      {{tpc_schema}}.web_page
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.web_returns,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.web_page
  where wr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and '1998-09-03'

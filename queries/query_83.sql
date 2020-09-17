@@ -2,48 +2,48 @@
 with sr_items as
  (select i_item_id item_id,
         sum(sr_return_quantity) sr_item_qty
- from {{tpc_schema}}.store_returns,
-      {{tpc_schema}}.item,
-      {{tpc_schema}}.date_dim
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.store_returns,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.item,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where sr_item_sk = i_item_sk
  and   d_date    in 
        (select d_date
-       from {{tpc_schema}}.date_dim
+       from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
        where d_week_seq in 
               (select d_week_seq
-              from {{tpc_schema}}.date_dim
+              from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
          where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
  and   sr_returned_date_sk   = d_date_sk
  group by i_item_id),
  cr_items as
  (select i_item_id item_id,
         sum(cr_return_quantity) cr_item_qty
- from {{tpc_schema}}.catalog_returns,
-      {{tpc_schema}}.item,
-      {{tpc_schema}}.date_dim
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.item,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where cr_item_sk = i_item_sk
  and   d_date    in 
        (select d_date
-       from {{tpc_schema}}.date_dim
+       from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
        where d_week_seq in 
               (select d_week_seq
-              from {{tpc_schema}}.date_dim
+              from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
          where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
  and   cr_returned_date_sk   = d_date_sk
  group by i_item_id),
  wr_items as
  (select i_item_id item_id,
         sum(wr_return_quantity) wr_item_qty
- from {{tpc_schema}}.web_returns,
-      {{tpc_schema}}.item,
-      {{tpc_schema}}.date_dim
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.web_returns,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.item,
+      {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where wr_item_sk = i_item_sk
  and   d_date    in 
        (select d_date
-       from {{tpc_schema}}.date_dim
+       from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
        where d_week_seq in 
               (select d_week_seq
-              from {{tpc_schema}}.date_dim
+              from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
               where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
  and   wr_returned_date_sk   = d_date_sk
  group by i_item_id)

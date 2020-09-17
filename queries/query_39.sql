@@ -4,10 +4,10 @@ with inv as
        ,stdev,mean, case mean when 0 then null else stdev/mean end cov
  from(select w_warehouse_name,w_warehouse_sk,i_item_sk,d_moy
             ,stddev_samp(inv_quantity_on_hand) stdev,avg(inv_quantity_on_hand) mean
-      from {{tpc_schema}}.inventory
-          ,{{tpc_schema}}.item
-          ,{{tpc_schema}}.warehouse
-          ,{{tpc_schema}}.date_dim
+      from {{tpc_schema_prefix}}_{{tpc_scale}}.inventory
+          ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
+          ,{{tpc_schema_prefix}}_{{tpc_scale}}.warehouse
+          ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
       where inv_item_sk = i_item_sk
         and inv_warehouse_sk = w_warehouse_sk
         and inv_date_sk = d_date_sk

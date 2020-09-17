@@ -7,10 +7,10 @@ select
  	                   order by sum(ss_net_profit)/sum(ss_ext_sales_price) asc
                 ) as rank_within_parent
  from
-    {{tpc_schema}}.store_sales
-   ,{{tpc_schema}}.date_dim d1
-   ,{{tpc_schema}}.item
-   ,{{tpc_schema}}.store
+    {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d1
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
  where
     d1.d_year = 2000 
  and d1.d_date_sk = ss_sold_date_sk

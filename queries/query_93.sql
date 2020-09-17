@@ -6,9 +6,9 @@ select  ss_customer_sk
                   ,ss_customer_sk
                   ,case when sr_return_quantity is not null then (ss_quantity-sr_return_quantity)*ss_sales_price
                                                             else (ss_quantity*ss_sales_price) end act_sales
-            from {{tpc_schema}}.store_sales left outer join {{tpc_schema}}.store_returns on (sr_item_sk = ss_item_sk
+            from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales left outer join {{tpc_schema_prefix}}_{{tpc_scale}}.store_returns on (sr_item_sk = ss_item_sk
                                                                and sr_ticket_number = ss_ticket_number)
-                ,{{tpc_schema}}.reason
+                ,{{tpc_schema_prefix}}_{{tpc_scale}}.reason
             where sr_reason_sk = r_reason_sk
               and r_reason_desc = 'Did not like the warranty') t
       group by ss_customer_sk

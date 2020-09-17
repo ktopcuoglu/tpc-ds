@@ -1,12 +1,12 @@
 
 select  i_brand_id brand_id, i_brand brand, i_manufact_id, i_manufact,
  	sum(ss_ext_sales_price) ext_price
- from {{tpc_schema}}.date_dim
-    , {{tpc_schema}}.store_sales
-    , {{tpc_schema}}.item
-    , {{tpc_schema}}.customer
-    , {{tpc_schema}}.customer_address
-    , {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.item
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.customer
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where d_date_sk = ss_sold_date_sk
    and ss_item_sk = i_item_sk
    and i_manager_id=7

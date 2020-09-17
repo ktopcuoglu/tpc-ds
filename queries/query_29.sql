@@ -8,14 +8,14 @@ select
     ,sum(sr_return_quantity) as store_returns_quantity
     ,sum(cs_quantity)        as catalog_sales_quantity
  from
-    {{tpc_schema}}.store_sales
-   ,{{tpc_schema}}.store_returns
-   ,{{tpc_schema}}.catalog_sales
-   ,{{tpc_schema}}.date_dim             d1
-   ,{{tpc_schema}}.date_dim             d2
-   ,{{tpc_schema}}.date_dim             d3
-   ,{{tpc_schema}}.store
-   ,{{tpc_schema}}.item
+    {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim             d1
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim             d2
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim             d3
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+   ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
  where
      d1.d_moy               = 4 
  and d1.d_year              = 1999

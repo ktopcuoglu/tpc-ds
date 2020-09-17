@@ -1,10 +1,10 @@
 
 select  ca_zip
        ,sum(cs_sales_price)
- from {{tpc_schema}}.catalog_sales
-     ,{{tpc_schema}}.customer
-     ,{{tpc_schema}}.customer_address
-     ,{{tpc_schema}}.date_dim
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+     ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
  where cs_bill_customer_sk = c_customer_sk
  	and c_current_addr_sk = ca_address_sk 
  	and ( substr(ca_zip,1,5) in ('85669', '86197','88274','83405','86475',

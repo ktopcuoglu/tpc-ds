@@ -5,13 +5,13 @@ select
         cc_manager Manager,
         sum(cr_net_loss) Returns_Loss
 from
-        {{tpc_schema}}.call_center,
-        {{tpc_schema}}.catalog_returns,
-        {{tpc_schema}}.date_dim,
-        {{tpc_schema}}.customer,
-        {{tpc_schema}}.customer_address,
-        {{tpc_schema}}.customer_demographics,
-        {{tpc_schema}}.household_demographics
+        {{tpc_schema_prefix}}_{{tpc_scale}}.call_center,
+        {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns,
+        {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim,
+        {{tpc_schema_prefix}}_{{tpc_scale}}.customer,
+        {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address,
+        {{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics,
+        {{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics
 where
         cr_call_center_sk       = cc_call_center_sk
 and     cr_returned_date_sk     = d_date_sk

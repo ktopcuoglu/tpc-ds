@@ -7,9 +7,9 @@ select  s_store_name, s_store_id,
         sum(case when (d_day_name='Thursday') then ss_sales_price else null end) thu_sales,
         sum(case when (d_day_name='Friday') then ss_sales_price else null end) fri_sales,
         sum(case when (d_day_name='Saturday') then ss_sales_price else null end) sat_sales
- from {{tpc_schema}}.date_dim
-    , {{tpc_schema}}.store_sales
-    , {{tpc_schema}}.store
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.store
  where d_date_sk = ss_sold_date_sk and
        s_store_sk = ss_store_sk and
        s_gmt_offset = -5 and

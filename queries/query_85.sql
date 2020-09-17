@@ -3,14 +3,14 @@ select  substr(r_reason_desc,1,20)
        ,avg(ws_quantity)
        ,avg(wr_refunded_cash)
        ,avg(wr_fee)
- from {{tpc_schema}}.web_sales
-    , {{tpc_schema}}.web_returns
-    , {{tpc_schema}}.web_page
-    , {{tpc_schema}}.customer_demographics cd1
-    , {{tpc_schema}}.customer_demographics cd2
-    , {{tpc_schema}}.customer_address
-    , {{tpc_schema}}.date_dim
-    , {{tpc_schema}}.reason 
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.web_sales
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.web_returns
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.web_page
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics cd1
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics cd2
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.reason 
  where ws_web_page_sk = wp_web_page_sk
    and ws_item_sk = wr_item_sk
    and ws_order_number = wr_order_number

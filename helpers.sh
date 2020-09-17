@@ -3,7 +3,7 @@ mkdir -p stdout && mkdir -p stderr
 function exec_with_log() {
     local start=`date +%s`
     local kpi=$1
-    local cmd=$2
+    local cmd=${@:2}
     local datestr=$(date +%Y%m%d-%H%M%S)
     local filename=${kpi//;/-}_$(date +%Y%m%d-%H%M%S)
 

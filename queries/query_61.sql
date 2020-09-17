@@ -6,13 +6,13 @@
 select  promotions,total,cast(promotions as {{decimaltype}})/cast(total as {{decimaltype}})*100
 from
   (select sum(ss_ext_sales_price) promotions
-   from  {{tpc_schema}}.store_sales
-        ,{{tpc_schema}}.store
-        ,{{tpc_schema}}.promotion
-        ,{{tpc_schema}}.date_dim
-        ,{{tpc_schema}}.customer
-        ,{{tpc_schema}}.customer_address 
-        ,{{tpc_schema}}.item
+   from  {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.promotion
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address 
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
    where ss_sold_date_sk = d_date_sk
    and   ss_store_sk = s_store_sk
    and   ss_promo_sk = p_promo_sk
@@ -26,12 +26,12 @@ from
    and   d_year = 1999
    and   d_moy  = 11) promotional_sales,
   (select sum(ss_ext_sales_price) total
-   from  {{tpc_schema}}.store_sales
-        ,{{tpc_schema}}.store
-        ,{{tpc_schema}}.date_dim
-        ,{{tpc_schema}}.customer
-        ,{{tpc_schema}}.customer_address
-        ,{{tpc_schema}}.item
+   from  {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
    where ss_sold_date_sk = d_date_sk
    and   ss_store_sk = s_store_sk
    and   ss_customer_sk= c_customer_sk

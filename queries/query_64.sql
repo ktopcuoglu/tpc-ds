@@ -2,8 +2,8 @@
 with cs_ui as
  (select cs_item_sk
         ,sum(cs_ext_list_price) as sale,sum(cr_refunded_cash+cr_reversed_charge+cr_store_credit) as refund
-  from {{tpc_schema}}.catalog_sales
-      ,{{tpc_schema}}.catalog_returns
+  from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+      ,{{tpc_schema_prefix}}_{{tpc_scale}}.catalog_returns
   where cs_item_sk = cr_item_sk
     and cs_order_number = cr_order_number
   group by cs_item_sk
@@ -28,24 +28,24 @@ cross_sales as
      ,sum(ss_wholesale_cost) s1
      ,sum(ss_list_price) s2
      ,sum(ss_coupon_amt) s3
-  FROM   {{tpc_schema}}.store_sales
-        ,{{tpc_schema}}.store_returns
+  FROM   {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.store_returns
         ,cs_ui
-        ,{{tpc_schema}}.date_dim d1
-        ,{{tpc_schema}}.date_dim d2
-        ,{{tpc_schema}}.date_dim d3
-        ,{{tpc_schema}}.store
-        ,{{tpc_schema}}.customer
-        ,{{tpc_schema}}.customer_demographics cd1
-        ,{{tpc_schema}}.customer_demographics cd2
-        ,{{tpc_schema}}.promotion
-        ,{{tpc_schema}}.household_demographics hd1
-        ,{{tpc_schema}}.household_demographics hd2
-        ,{{tpc_schema}}.customer_address ad1
-        ,{{tpc_schema}}.customer_address ad2
-        ,{{tpc_schema}}.income_band ib1
-        ,{{tpc_schema}}.income_band ib2
-        ,{{tpc_schema}}.item
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d1
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d2
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim d3
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.store
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics cd1
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics cd2
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.promotion
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics hd1
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.household_demographics hd2
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address ad1
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.customer_address ad2
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.income_band ib1
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.income_band ib2
+        ,{{tpc_schema_prefix}}_{{tpc_scale}}.item
   WHERE  ss_store_sk = s_store_sk AND
          ss_sold_date_sk = d1.d_date_sk AND
          ss_customer_sk = c_customer_sk AND

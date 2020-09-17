@@ -2,10 +2,10 @@
 select  i_item_id
        ,i_item_desc
        ,i_current_price
- from {{tpc_schema}}.item
-    , {{tpc_schema}}.inventory
-    , {{tpc_schema}}.date_dim
-    , {{tpc_schema}}.catalog_sales
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.item
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.inventory
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
  where i_current_price between 22 and 22 + 30
  and inv_item_sk = i_item_sk
  and d_date_sk=inv_date_sk

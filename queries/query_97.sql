@@ -2,7 +2,7 @@
 with ssci as (
 select ss_customer_sk customer_sk
       ,ss_item_sk item_sk
-from {{tpc_schema}}.store_sales,{{tpc_schema}}.date_dim
+from {{tpc_schema_prefix}}_{{tpc_scale}}.store_sales,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
 where ss_sold_date_sk = d_date_sk
   and d_month_seq between 1212 and 1212 + 11
 group by ss_customer_sk
@@ -10,7 +10,7 @@ group by ss_customer_sk
 csci as(
  select cs_bill_customer_sk customer_sk
       ,cs_item_sk item_sk
-from {{tpc_schema}}.catalog_sales,{{tpc_schema}}.date_dim
+from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales,{{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
 where cs_sold_date_sk = d_date_sk
   and d_month_seq between 1212 and 1212 + 11
 group by cs_bill_customer_sk

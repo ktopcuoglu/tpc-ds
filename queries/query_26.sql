@@ -4,11 +4,11 @@ select  i_item_id,
         avg(cs_list_price) agg2,
         avg(cs_coupon_amt) agg3,
         avg(cs_sales_price) agg4 
- from {{tpc_schema}}.catalog_sales
-    , {{tpc_schema}}.customer_demographics
-    , {{tpc_schema}}.date_dim
-    , {{tpc_schema}}.item
-    , {{tpc_schema}}.promotion
+ from {{tpc_schema_prefix}}_{{tpc_scale}}.catalog_sales
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.customer_demographics
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.date_dim
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.item
+    , {{tpc_schema_prefix}}_{{tpc_scale}}.promotion
  where cs_sold_date_sk = d_date_sk 
    and cs_item_sk = i_item_sk 
    and cs_bill_cdemo_sk = cd_demo_sk 
