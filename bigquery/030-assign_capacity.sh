@@ -24,3 +24,6 @@ echo "assign reservation"
  --job_type=QUERY \
  --assignee_id=$bq_project \
  --assignee_type=PROJECT
+
+echo "wait a minute..."
+sleep 60

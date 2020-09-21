@@ -3,7 +3,7 @@ shopt -s expand_aliases
 source $TPCDS_HOME/tpc_aliases.sh
 source $TPCDS_HOME/helpers.sh
 
-export tpc_dialect=postgre
+export tpc_dialect=postgresql
 
 for n in `seq 1 99`
 do
