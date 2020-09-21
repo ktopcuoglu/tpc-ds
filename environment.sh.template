@@ -2,7 +2,7 @@ export TPCDS_HOME="$( cd "$(dirname "$0")" ; pwd -P )"
 
 export tpc_scale=100
 export tpc_schema_prefix=tpcds
-export tpc_schema=${tpc_schema_prefix}_${tpc_scale}
+export tpc_px_count=10
 
 #adbpostgre configs
 export adb_host=
@@ -20,6 +20,7 @@ export CLOUDSDK_CONFIG=$TPCDS_HOME/.gcloud-config
 export GOOGLE_APPLICATION_CREDENTIALS=$TPCDS_HOME/resources/gcp_service_account.json
 export bq_project=
 export bq_location=eu
+export bq_flex_slots=500
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 source $TPCDS_HOME/tpc_aliases.sh
