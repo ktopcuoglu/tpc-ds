@@ -1,10 +1,8 @@
 #!/bin/bash
 shopt -s expand_aliases
 source $TPCDS_HOME/helpers.sh
-source $TPCDS_HOME/tpc_aliases.sh
 
 echo "import tpcds schema"
-#time j2 $TPCDS_HOME/adbpostgre/021-import_tables.sql | psql_adb --echo-all
 
 declare -a arr=("customer_address" "customer_demographics" "date_dim" \
                 "warehouse" "ship_mode" "time_dim" "reason" "income_band" \

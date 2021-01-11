@@ -1,7 +1,6 @@
 #!/bin/bash
 shopt -s expand_aliases
 source $TPCDS_HOME/helpers.sh
-source $TPCDS_HOME/tpc_aliases.sh
 
 echo "analyze tables"
 
